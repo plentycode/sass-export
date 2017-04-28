@@ -2,7 +2,11 @@
   "name": "sass-export",
   "version": "0.0.2",
   "description": "Convert Sass variables to Json format",
-  "main": "index.js",
+  "main": "./dist/index.js",
+  "files": [
+    "bin",
+    "dist"
+  ],
   "scripts": {
     "build": "babel src --out-dir dist",
     "prepublish": "npm run build",
