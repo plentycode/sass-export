@@ -1,6 +1,6 @@
 {
   "name": "sass-export",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Convert Sass variables to Json format",
   "main": "index.js",
   "scripts": {
@@ -8,7 +8,6 @@
     "prepublish": "npm run build",
     "prestart": "npm run build",
     "watch": "npm run build -- --watch"
-
   },
   "keywords": [
     "Sass",
