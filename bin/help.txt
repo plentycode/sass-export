@@ -1,0 +1,5 @@
+Usage: node sass-converter [options] [<file>]
+
+Options:
+
+    --help,        -h    Outputs this help screen.

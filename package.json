@@ -1,0 +1,35 @@
+{
+  "name": "sass-export",
+  "version": "0.0.1",
+  "description": "Convert Sass variables to Json format",
+  "main": "index.js",
+  "scripts": {
+    "build": "babel src --out-dir dist",
+    "prepublish": "npm run build",
+    "prestart": "npm run build",
+    "watch": "npm run build -- --watch"
+
+  },
+  "keywords": [
+    "Sass",
+    "Json",
+    "Sass-toJson",
+    "Node"
+  ],
+  "author": {
+    "name": "Carlos I Mercado",
+    "email": "civan.cim@gmail.com"
+  },
+  "bin": {
+    "sass-export": "./bin/sass-export"
+  },
+  "license": "ISC",
+  "dependencies": {
+    "minimist": "^1.2.0",
+    "node-sass": "^4.5.2"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.24.1",
+    "babel-preset-env": "^1.4.0"
+  }
+}
