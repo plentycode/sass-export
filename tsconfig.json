@@ -1,0 +1,14 @@
+{
+  "compilerOptions": {
+    "target": "es5",
+    "module": "commonjs",
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "removeComments": true,
+    "newLine": "LF"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "typeRoots": ["node_modules/@types"]
+}

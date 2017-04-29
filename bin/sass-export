@@ -2,7 +2,7 @@
 
 let sassJsConverter = require('../dist').default;
 let fs = require('fs');
-let path =  require('path');
+let path = require('path');
 let minimist = require('minimist');
 
 let options = minimist(process.argv.slice(2), {
@@ -11,19 +11,16 @@ let options = minimist(process.argv.slice(2), {
   }
 });
 
-console.log(options);
-
 let filePath = options._[0];
 
 if (!filePath || options.help) {
   fs.createReadStream(path.resolve(__dirname, 'help.txt'))
-  .pipe(process.stdout)
-  .on('close', ()=> {
-    throw Error('Error reading help');
-  });
+    .pipe(process.stdout)
+    .on('close', () => {
+      throw Error('Error reading help');
+    });
 } else {
-  let result = sassJsConverter(filePath, options);
-
-  console.log(result);
-
+  let result = sassJsConverter({
+    filePath
+  });
 }

@@ -8,7 +8,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "babel src --out-dir dist",
+    "build": "tsc --p tsconfig.json",
     "prepublish": "npm run build",
     "prestart": "npm run build",
     "watch": "npm run build -- --watch"
@@ -32,7 +32,8 @@
     "node-sass": "^4.5.2"
   },
   "devDependencies": {
-    "babel-cli": "^6.24.1",
-    "babel-preset-env": "^1.4.0"
+    "@types/node": "^7.0.14",
+    "@types/node-sass": "^3.10.32",
+    "typescript": "^2.3.1"
   }
 }
