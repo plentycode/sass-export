@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-let sassJsConverter = require('../dist').default;
+let sassExport = require('../dist').default;
 let fs = require('fs');
 let path = require('path');
 let minimist = require('minimist');
@@ -20,7 +20,10 @@ if (!filePath || options.help) {
       throw Error('Error reading help');
     });
 } else {
-  let result = sassJsConverter({
+
+  let result = sassExport({
     filePath
   });
+
+  console.log(result.getArray());
 }

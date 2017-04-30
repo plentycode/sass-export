@@ -1,9 +1,7 @@
-import Converter from './converter';
+import Converter from './app/converter';
 
-let options: IOptions;
-
-let sassJsConverter = (options:IOptions) => {
-  let converter = new Converter(options);
+let sassExporter = (options: IOptions) => {
+  return new Converter(options);
 };
 
-export default sassJsConverter;
+export default sassExporter;

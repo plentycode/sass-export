@@ -1,0 +1,18 @@
+{
+  "extends": "tslint:recommended",
+  "rulesDirectory": ["./src"],
+  "rules": {
+    "new-parens": true,
+    "no-arg": true,
+    "no-bitwise": true,
+    "quotemark": ["single"],
+    "no-conditional-assignment": true,
+    "no-consecutive-blank-lines": [],
+    "prefer-const": false,
+    "trailing-comma": [false],
+    "object-literal-sort-keys":false,
+    "no-console": [
+      false
+    ]
+  }
+}

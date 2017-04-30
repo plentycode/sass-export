@@ -5,5 +5,6 @@ interface IOptions {
 
 interface IDeclaration {
   variable: string,
-  value: string
+  value: string,
+  compiledValue: string
 }
