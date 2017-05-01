@@ -1,7 +1,7 @@
 {
   "name": "sass-export",
   "version": "0.0.4",
-  "description": "Convert Sass variables to Json format",
+  "description": "Exports Sass files to Json format",
   "main": "./dist/index.js",
   "files": [
     "bin",
@@ -15,6 +15,7 @@
   },
   "keywords": [
     "Sass",
+    "Sass to JS",
     "Json",
     "Sass-toJson",
     "Node"
@@ -30,6 +31,10 @@
   "dependencies": {
     "minimist": "^1.2.0",
     "node-sass": "^4.5.2"
+  },
+  "repository" :{
+    "type" : "git",
+    "url" : "https://github.com/civan/sass-export.git"
   },
   "devDependencies": {
     "@types/node": "^7.0.14",

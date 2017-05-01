@@ -1,5 +1,6 @@
-Usage: node sass-converter [options] [<file>]
+Usage: sass-export [<file>] [options]
 
 Options:
 
+    --output       -o    <path>, Output file path.
     --help,        -h    Outputs this help screen.

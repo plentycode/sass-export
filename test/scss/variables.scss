@@ -29,6 +29,40 @@ $brand-purple: #ba68c8;
 $brand-orchid-dark: #6b3b63;
 $brand-slate: #4e6c78;
 
+$first: 52px;
+$second-variable: red;
+$global-variable: #123; // inline comment here
+$references: $second-variable;
+$scss-function: lighten(#123, 10%);
+// some comments in here
+$scss-function-with-variable: darken($global-variable, 5%);
+$image: url(sample.svg);
+$image-with-quotes: url('sample.svg');
+$calculation: $first - 12px;
+//some more comments with a return after
+
+$multiple-variables: $first solid $second-variable;
+$multiple-calculations: $first - floor(12.5px);
+
+$gray-medium: #757575;
+$base-value: 25px;
+$gray-dark: darken($gray-medium, 5%);
+$logo: url(logo.svg);
+$logo-quotes: url('logo.svg');
+$calculation: $base-value - 12px;
+$multiple-calculations: $base-value - floor(12.5px);
+
+$gray-50: #fff;
+$gray-500: #f6f6f6;
+$uses-gray-500: $gray-500;
+
+$font-size-small: 15px;
+$font-size-large: 18px;
+$icon-font-size: $font-size-small;
+$icon-font-size-lg: $font-size-large;
+
+
+
 $brand-colors: (
   'gray-light': $brand-gray-light,
   'gray': $brand-gray,

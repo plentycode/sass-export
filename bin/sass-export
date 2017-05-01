@@ -7,6 +7,7 @@ let minimist = require('minimist');
 
 let options = minimist(process.argv.slice(2), {
   alias: {
+    o: 'output',
     h: 'help'
   }
 });
@@ -19,11 +20,16 @@ if (!filePath || options.help) {
     .on('close', () => {
       throw Error('Error reading help');
     });
-} else {
-
-  let result = sassExport({
-    filePath
-  });
-
-  console.log(result.getArray());
+  return;
 }
+
+if (!options.output) {
+  options.output = filePath + '.json';
+}
+
+let result = sassExport({
+  filePath
+});
+
+fs.writeFileSync(options.output, JSON.stringify(result.getArray()));
+console.log(`${options.output} was generated, go check it out!`);
