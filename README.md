@@ -22,6 +22,7 @@ $ sass-export path/to/_variables.scss --output exported-sass.json
 ### Here some sample output
 
 [file] _variables.css
+
 ``` scss
   $gray-medium: #757575;
   $base-value: 25px;
@@ -35,14 +36,14 @@ $ sass-export path/to/_variables.scss --output exported-sass.json
 [output]  exported-sass.json
 
 ``` javascript
-[ 
-  {"variable":"gray-medium", "value":"#757575", "compiledValue":"#757575"},
-  {"variable":"base-value", "value":"25px", "compiledValue":"25px"},
-  {"variable":"gray-dark", "value":"darken($gray-medium, 5%)", "compiledValue":"#686868"},
-  {"variable":"logo", "value":"url(logo.svg)", "compiledValue":"url(logo.svg)"},
-  {"variable":"logo-quotes", "value":"url('logo.svg')", "compiledValue":"url(\"sample.svg\")"},
-  {"variable":"calculation", "value":"$base-value - 12px", "compiledValue":"13px"},
-  {"variable":"multiple-calculations", "value":"$base-value - floor(12.5px)", "compiledValue":"13px"}
+[
+  { "variable": "$gray-medium", "value": "#757575", "compiledValue": "#757575" },
+  { "variable": "$base-value", "value": "25px", "compiledValue": "25px" },
+  { "variable": "$gray-dark", "value": "darken($gray-medium, 5%)", "compiledValue" :"#686868" },
+  { "variable": "$logo", "value": "url(logo.svg)", "compiledValue": "url(logo.svg)" },
+  { "variable": "$logo-quotes", "value": "url('logo.svg')", "compiledValue": "url(\"sample.svg\")" },
+  { "variable": "$calculation", "value": "$base-value - 12px", "compiledValue": "13px" },
+  { "variable": "$multiple-calculations", "value": "$base-value - floor(12.5px)", "compiledValue": "13px" }
 ]
 ```
 

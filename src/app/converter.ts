@@ -20,6 +20,7 @@ class Converter {
 
     return parsedDeclarations.map((declaration) => {
       declaration.compiledValue = this.renderPropertyValue(content, declaration);
+      declaration.variable = `$${declaration.variable}`;
       return declaration;
     });
 
