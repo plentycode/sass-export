@@ -4,7 +4,7 @@ $slate: #8ca5af;
 $slate-dark: #4f6f7b;
 $gray-medium: #757575;
 
-// Brand
+//@sass-export-section=brand-colors
 $brand-gray-light: #eceff1;
 $brand-gray-medium: #d6d6d6;
 $brand-gray: #b0bec5;
@@ -24,3 +24,4 @@ $brand-yellow: #ffb74d;
 $brand-pink: #d70073;
 $brand-purple: #ba68c8;
 $brand-orchid-dark: #6b3b63;
+//@end-sass-export-section

@@ -2,7 +2,9 @@ const VARIABLE_PATERN = '(?!\\d)[\\w_-][\\w\\d_-]*';
 const VALUE_PATERN = '[^;"]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
 const DECLARATION_PATTERN =
   `\\$'?(${VARIABLE_PATERN})'?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
+const SECTION_PATTERN = '@sass-export-section=\s*(.+)';
 const QUOTE_SCAPE_TOKEN = '&quot;';
+
 
 
 class Parser {
@@ -21,6 +23,11 @@ class Parser {
 
  private extractDeclarations(content: string): [any] {
     const matches = content.match(new RegExp(DECLARATION_PATTERN, 'g'));
+
+    let sectionMatches = content.match(new RegExp(SECTION_PATTERN, 'g'));
+
+    console.log(sectionMatches);
+
 
     if (!matches) {
       /// TODO: handle errors  throw new Error(`Error while extracting declaration:\n\t${content}`);
