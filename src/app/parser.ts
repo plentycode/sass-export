@@ -24,7 +24,7 @@ class Parser {
 
     if (!matches) {
       /// TODO: handle errors  throw new Error(`Error while extracting declaration:\n\t${content}`);
-      return;
+      return [] as any;
     }
 
     return matches as any;

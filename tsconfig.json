@@ -10,5 +10,8 @@
   "include": [
     "src/**/*.ts"
   ],
+  "exclude": [
+    "src/**/*.test.ts"
+  ],
   "typeRoots": ["node_modules/@types"]
 }

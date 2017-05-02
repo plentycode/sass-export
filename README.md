@@ -16,7 +16,7 @@ $ npm install -g sass-export
 Ready to export
 
 ```
-$ sass-export path/to/_variables.scss --output exported-sass.json
+$ sass-export path/to/_globals.scss  path/to/_colors.scs --output exported-sass.json
 ```
 
 ### Here some sample output
@@ -60,7 +60,7 @@ And of course Dillinger itself is open source with a [public repository][dill]
 
 ### Usage
 
-Usage: sass-export [<.scss path>] [options]
+Usage: sass-export [<inputFiles>] [options]
 
 | Options | Description |
 | ------        | ------ |

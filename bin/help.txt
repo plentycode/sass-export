@@ -1,4 +1,4 @@
-Usage: sass-export [<file>] [options]
+Usage: sass-export [<inputFiles>] [options]
 
 Options:
 

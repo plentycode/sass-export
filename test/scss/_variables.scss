@@ -80,3 +80,12 @@ $brand-colors: (
   'purple': $brand-purple,
   'orchid-dark': $brand-orchid-dark
 );
+
+
+$deepMap: (
+  a: 1,
+  b: 2,
+  c: (a: 1, b:2),
+);
+
+$deepMapValue: map-get(map-get($deepMap, c), b);

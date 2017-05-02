@@ -9,15 +9,18 @@
   ],
   "scripts": {
     "build": "tsc --p tsconfig.json",
+    "dev": "npm run build & npm run test",
     "prepublish": "npm run build",
     "prestart": "npm run build",
-    "watch": "npm run build -- --watch"
+    "watch": "npm run dev -- --watch",
+    "test": "mocha -r ts-node/register src/**/*.test.ts"
   },
   "keywords": [
     "Sass",
     "Sass to JS",
     "Json",
     "Sass-toJson",
+    "sass variables",
     "Node"
   ],
   "author": {
@@ -37,8 +40,13 @@
     "url": "https://github.com/civan/sass-export.git"
   },
   "devDependencies": {
+    "@types/chai": "^3.5.2",
+    "@types/mocha": "^2.2.41",
     "@types/node": "^7.0.14",
     "@types/node-sass": "^3.10.32",
+    "chai": "^3.5.0",
+    "mocha": "^3.3.0",
+    "ts-node": "^3.0.2",
     "typescript": "^2.3.1"
   }
 }

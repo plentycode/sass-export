@@ -1,20 +1,23 @@
 #!/usr/bin/env node
 
-let sassExport = require('../dist').default;
-let fs = require('fs');
-let path = require('path');
-let minimist = require('minimist');
+var sassExport = require('../dist').default;
+var fs = require('fs');
+var path = require('path');
+var minimist = require('minimist');
 
-let options = minimist(process.argv.slice(2), {
+var options = minimist(process.argv.slice(2), {
   alias: {
+    f: 'files',
     o: 'output',
     h: 'help'
   }
 });
 
-let filePath = options._[0];
+var inputFiles = options._;
 
-if (!filePath || options.help) {
+console.log(inputFiles);
+
+if (!inputFiles.length || options.help) {
   fs.createReadStream(path.resolve(__dirname, 'help.txt'))
     .pipe(process.stdout)
     .on('close', () => {
@@ -24,11 +27,11 @@ if (!filePath || options.help) {
 }
 
 if (!options.output) {
-  options.output = filePath + '.json';
+  options.output = inputFiles[0] + '-sass-exported.json';
 }
 
-let result = sassExport({
-  filePath
+var result = sassExport({
+  inputFiles
 });
 
 fs.writeFileSync(options.output, JSON.stringify(result.getArray()));

@@ -14,7 +14,7 @@ class Converter {
   }
 
   public getArray(): IDeclaration[] {
-    let content = fs.readFileSync(this.options.filePath).toString();
+    let content = this.getContent();
     let parsedDeclarations = new Parser(content).parse();
 
 
@@ -35,6 +35,12 @@ class Converter {
     let wrappedRendered = String(rendered.css);
 
     return this.unWrapValue(wrappedRendered);
+  }
+
+  private getContent(): string {
+    let contents = this.options.inputFiles.map((path) => fs.readFileSync(path).toString());
+
+    return contents.join('\n\n');
   }
 
   private wrapCss(cssDeclaration: IDeclaration): string {

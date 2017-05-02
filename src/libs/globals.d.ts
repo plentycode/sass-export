@@ -1,5 +1,5 @@
 interface IOptions {
-  filePath: string,
+  inputFiles: string[],
   format: string
 }
 
