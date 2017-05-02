@@ -7,7 +7,6 @@ var minimist = require('minimist');
 
 var options = minimist(process.argv.slice(2), {
   alias: {
-    f: 'files',
     o: 'output',
     h: 'help'
   }

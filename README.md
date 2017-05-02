@@ -4,7 +4,7 @@ This is perfect for working on sites doc generation.
 
 ### Let's get started!
 
-Sass-Export requires [Node.js](https://nodejs.org/) v4+ to run.
+Sass-Export requires [Node.js](https://nodejs.org/) v5+ to run.
 
 #### CLI
 Install it from NPM
@@ -16,7 +16,7 @@ $ npm install -g sass-export
 Ready to export
 
 ```
-$ sass-export path/to/_globals.scss  path/to/_colors.scs --output exported-sass.json
+$ sass-export path/to/_globals.scss path/to/_colors.scs --output exported-sass.json
 ```
 
 ### Here some sample output
@@ -55,16 +55,13 @@ Sass-Export has dependencies on these projects:
 * [node.js] - evented I/O for the backend
 * [Node-Sass] - library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass.
 
-And of course Dillinger itself is open source with a [public repository][dill]
- on GitHub.
-
 ### Usage
 
 Usage: sass-export [<inputFiles>] [options]
 
 | Options | Description |
 | ------        | ------ |
-| --output, -o  |  <path>, Output file path. |
+| --output, -o  |  <filepath>, Output file path. |
 | --help, -h    |   Outputs this help screen. |
 
 License
