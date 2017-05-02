@@ -57,12 +57,12 @@ Sass-Export has dependencies on these projects:
 
 ### Usage
 
-Usage: sass-export [<inputFiles>] [options]
+Usage: sass-export [inputFiles] [options]
 
 | Options | Description |
 | ------        | ------ |
-| --output, -o  |  <filepath>, Output file path. |
-| --help, -h    |   Outputs this help screen. |
+|  -o, --output  |   File path where to save the JSON exported. |
+|  -h, --help    |   Shows up this help screen. |
 
 License
 ----
