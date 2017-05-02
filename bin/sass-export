@@ -14,8 +14,6 @@ var options = minimist(process.argv.slice(2), {
 
 var inputFiles = options._;
 
-console.log(inputFiles);
-
 if (!inputFiles.length || options.help) {
   fs.createReadStream(path.resolve(__dirname, 'help.txt'))
     .pipe(process.stdout)
