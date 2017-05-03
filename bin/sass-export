@@ -30,6 +30,6 @@ if (!options.output) {
 var result = sassExport({
   inputFiles
 });
-
+console.log(JSON.stringify(result.getArray()));
 fs.writeFileSync(options.output, JSON.stringify(result.getArray()));
 console.log(`${options.output} was generated, go check it out!`);

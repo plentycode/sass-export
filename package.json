@@ -12,7 +12,7 @@
     "dev": "npm run build & npm run test",
     "prepublish": "npm run build",
     "prestart": "npm run build",
-    "watch": "npm run dev -- --watch",
+    "watch": "npm run build -- --watch",
     "test": "mocha -r ts-node/register src/**/*.test.ts"
   },
   "keywords": [

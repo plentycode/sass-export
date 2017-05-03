@@ -2,9 +2,8 @@ const VARIABLE_PATERN = '(?!\\d)[\\w_-][\\w\\d_-]*';
 const VALUE_PATERN = '[^;"]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
 const DECLARATION_PATTERN =
   `\\$'?(${VARIABLE_PATERN})'?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
-const SECTION_PATTERN = '@sass-export-section=\s*(.+)';
+const SECTION_PATTERN = '(@sass-export-section=)(".+")';
 const QUOTE_SCAPE_TOKEN = '&quot;';
-
 
 
 class Parser {
@@ -14,20 +13,35 @@ class Parser {
     this.rawContent = rawContent;
   }
 
-  public parse(): IDeclaration[] {
+  public parse(): any {
     let matches = this.extractDeclarations(this.rawContent);
-    let declarations = matches.map((match) => this.parseSingleDecaration(match));
+    // let declarations = matches.map((match) => this.parseSingleDecaration(match));
+    let currentSection = 'data';
+    let declarations = {};
+    declarations[currentSection] = [];
+
+    for (let match of matches) {
+      if (match.indexOf('@sass-export-section') > -1) {
+        let sectionName = String(new RegExp(SECTION_PATTERN, 'gi').exec(match)[2]);
+
+        // TODO: check for valid-names
+        if (sectionName) {
+          currentSection = sectionName.replace(/"/g, '');
+          declarations[currentSection] = [];
+        }
+
+        console.log('found a section:' + sectionName);
+
+      } else {
+        declarations[currentSection].push(this.parseSingleDecaration(match));
+      }
+    }
 
     return declarations;
   }
 
- private extractDeclarations(content: string): [any] {
-    const matches = content.match(new RegExp(DECLARATION_PATTERN, 'g'));
-
-    let sectionMatches = content.match(new RegExp(SECTION_PATTERN, 'g'));
-
-    console.log(sectionMatches);
-
+  private extractDeclarations(content: string): [any] {
+    const matches = content.match(new RegExp(DECLARATION_PATTERN + '|' + SECTION_PATTERN, 'g'));
 
     if (!matches) {
       /// TODO: handle errors  throw new Error(`Error while extracting declaration:\n\t${content}`);

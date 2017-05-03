@@ -4,7 +4,7 @@ $slate: #8ca5af;
 $slate-dark: #4f6f7b;
 $gray-medium: #757575;
 
-//@sass-export-section=brand-colors
+//@sass-export-section="brand-colors"
 $brand-gray-light: #eceff1;
 $brand-gray-medium: #d6d6d6;
 $brand-gray: #b0bec5;
@@ -13,6 +13,7 @@ $brand-blue-light: #9fd1da;
 $brand-blue: #64b5f6;
 $brand-blue-gray: #647b86;
 $brand-blue-gray-dark: #546E7A;
+//@sass-export-section="brand-colors-secondary"
 $brand-solitude: #ebeff2;
 $brand-charcoal-dark: #263238;
 $brand-cyan: #84ffff;

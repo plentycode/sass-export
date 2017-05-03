@@ -13,16 +13,18 @@ class Converter {
     this.options = options;
   }
 
-  public getArray(): IDeclaration[] {
+  public getArray(): any[] {
     let content = this.getContent();
     let parsedDeclarations = new Parser(content).parse();
 
+    console.log(parsedDeclarations);
+    return parsedDeclarations;
 
-    return parsedDeclarations.map((declaration) => {
+ /*   return parsedDeclarations.map((declaration) => {
       declaration.compiledValue = this.renderPropertyValue(content, declaration);
       declaration.variable = `$${declaration.variable}`;
       return declaration;
-    });
+    });*/
 
   }
 
