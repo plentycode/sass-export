@@ -3,4 +3,8 @@ Usage: sass-export [<inputFiles>] [options]
 Options:
 
     --output       -o    <path>, Output file path.
+
+    --structured   -s    If present, it will output an object structured using sections.
+                         Usage: start your code blocks with /** @sass-extract-section="MySection" */.
+
     --help,        -h    Outputs this help screen.

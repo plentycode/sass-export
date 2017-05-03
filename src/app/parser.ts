@@ -3,7 +3,7 @@ const VALUE_PATERN = '[^;"]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
 const DECLARATION_PATTERN =
   `\\$'?(${VARIABLE_PATERN})'?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
 const SECTION_PATTERN = '(@sass-export-section=)(".+")';
-const QUOTE_SCAPE_TOKEN = '&quot;';
+const END_SECTION_PATTERN = '(@end-sass-export-section)';
 
 
 class Parser {
@@ -13,11 +13,29 @@ class Parser {
     this.rawContent = rawContent;
   }
 
-  public parse(): any {
+  public parse(): IDeclaration[] {
     let matches = this.extractDeclarations(this.rawContent);
-    // let declarations = matches.map((match) => this.parseSingleDecaration(match));
-    let currentSection = 'data';
+    let declarations = [];
+
+    for (let match of matches) {
+      // TODO: refactor please
+      if (match.indexOf('@sass-export-section') < 0 && match.indexOf('@end-sass-export-section') < 0) {
+        declarations.push(this.parseSingleDecaration(match));
+      }
+    }
+
+    return declarations;
+  }
+
+  public parseStructured(): any {
+    let matches = this.extractDeclarationsStructured(this.rawContent);
+    let currentSection = 'globals';
     let declarations = {};
+
+    if (!matches || !matches.length) {
+      return {};
+    }
+
     declarations[currentSection] = [];
 
     for (let match of matches) {
@@ -27,10 +45,11 @@ class Parser {
         // TODO: check for valid-names
         if (sectionName) {
           currentSection = sectionName.replace(/"/g, '');
-          declarations[currentSection] = [];
+          declarations[currentSection] = declarations[currentSection] || [];
         }
 
-        console.log('found a section:' + sectionName);
+      } else if (match.indexOf('@end-sass-export-section') > -1) {
+        currentSection = 'globals';
 
       } else {
         declarations[currentSection].push(this.parseSingleDecaration(match));
@@ -40,8 +59,18 @@ class Parser {
     return declarations;
   }
 
+  private extractDeclarationsStructured(content: string): [any] {
+    const matches = content.match(new RegExp(`${DECLARATION_PATTERN}|${SECTION_PATTERN}|${END_SECTION_PATTERN}`, 'g'));
+
+    if (!matches) {
+      return [] as any;
+    }
+
+    return matches as any;
+  }
+
   private extractDeclarations(content: string): [any] {
-    const matches = content.match(new RegExp(DECLARATION_PATTERN + '|' + SECTION_PATTERN, 'g'));
+    const matches = content.match(new RegExp(DECLARATION_PATTERN, 'g'));
 
     if (!matches) {
       /// TODO: handle errors  throw new Error(`Error while extracting declaration:\n\t${content}`);
@@ -66,10 +95,6 @@ class Parser {
     let value = matches[2].trim().replace(/\s*\n+\s*/, '');
 
     return { variable, value } as IDeclaration;
-  }
-
-  private unescapeQuotes(content: string) {
-    return content.replace(new RegExp(`^${QUOTE_SCAPE_TOKEN}`), '').replace(new RegExp(`${QUOTE_SCAPE_TOKEN}$`), '');
   }
 }
 

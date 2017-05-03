@@ -32,7 +32,7 @@ describe('Converter class', () => {
     let results = null;
 
     // tslint:disable-next-line:only-arrow-functions
-    before(function() {
+    before(function () {
       converter = new Converter(opts);
       results = converter.getArray();
 
@@ -63,13 +63,13 @@ describe('Converter class', () => {
     });
   });
 
-  describe('Multiple imput files', () => {
+  describe('Multiple input files', () => {
     let opts = { inputFiles: [], format: 'JSON' };
     let converter = null;
     let results = null;
 
     // tslint:disable-next-line:only-arrow-functions
-    before(function() {
+    before(function () {
       opts.inputFiles.push(path.resolve('./test/scss/_colors.scss'));
       opts.inputFiles.push(path.resolve('./test/scss/_breakpoints.scss'));
 
@@ -87,5 +87,31 @@ describe('Converter class', () => {
 
   });
 
+
+  describe('Structured Functionality', () => {
+
+    it('should have a public getStructured() method', () => {
+      let converter = new Converter(options);
+      expect(converter.getStructured).to.exist;
+    });
+
+    it('should return an empty array if file is empty or invalid', () => {
+      let opts = { inputFiles: [path.resolve('./test/scss/_empty-rules.scss')], format: 'JSON' };
+      let converter = new Converter(opts);
+      expect(converter.getStructured()).that.is.an('object');
+      expect(converter.getStructured()).to.be.empty;
+    });
+
+    it('should compile values', () => {
+      let opts = { inputFiles: [path.resolve('./test/scss/_colors.scss')], format: 'JSON' };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      // globals
+      expect(structured.globals[0]).to.have.property('compiledValue');
+
+    });
+
+  });
 
 });

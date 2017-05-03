@@ -3,7 +3,6 @@ import * as fs from 'fs';
 import * as sass from 'node-sass';
 import Parser from './parser';
 
-// Consts
 const WRAPPER_CSS_ID = '#sass-export-id';
 
 class Converter {
@@ -17,14 +16,36 @@ class Converter {
     let content = this.getContent();
     let parsedDeclarations = new Parser(content).parse();
 
-    console.log(parsedDeclarations);
-    return parsedDeclarations;
-
- /*   return parsedDeclarations.map((declaration) => {
+    return parsedDeclarations.map((declaration) => {
       declaration.compiledValue = this.renderPropertyValue(content, declaration);
       declaration.variable = `$${declaration.variable}`;
       return declaration;
-    });*/
+    });
+
+  }
+
+  public getStructured(): any {
+    let content = this.getContent();
+    let parsedDeclarations = new Parser(content).parseStructured();
+    this.compileValue(parsedDeclarations);
+
+    return parsedDeclarations;
+  }
+
+  private compileValue(parsedDeclarations: any): object {
+    for (let group in parsedDeclarations) {
+      if (parsedDeclarations.hasOwnProperty(group)) {
+        let content = this.getContent();
+        let compiledGroup = parsedDeclarations[group].map((declaration) => {
+          declaration.compiledValue = this.renderPropertyValue(content, declaration);
+          declaration.variable = `$${declaration.variable}`;
+          return declaration;
+        });
+      }
+    }
+
+
+    return parsedDeclarations;
 
   }
 
