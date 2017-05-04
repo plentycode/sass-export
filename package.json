@@ -1,7 +1,7 @@
 {
   "name": "sass-export",
   "version": "0.1.0",
-  "description": "Exports Sass files to Json format, and manage section with annotations",
+  "description": "Exports Sass files to Json format, able to manage sections with annotations in comments.",
   "main": "./dist/index.js",
   "files": [
     "bin",
@@ -17,6 +17,7 @@
   },
   "keywords": [
     "Sass",
+    "Sass Utilities",
     "Scss",
     "Sass annotations",
     "Sass to JS",

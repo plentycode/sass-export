@@ -1,0 +1,22 @@
+$black: #000;
+$slate: #8ca5af;
+
+/**
+ * @sass-export-section="brand-colors"
+ */
+
+$brand-gray-light: #eceff1;
+$brand-gray-medium: #d6d6d6;
+$brand-gray: #b0bec5;
+//@end-sass-export-section [optional]
+
+
+/**
+ * @sass-export-section="fonts"
+ */
+
+$font-size: 16px;
+$font-color: $brand-gray-medium;
+//@end-sass-export-section
+
+$global-group: #ff0000;

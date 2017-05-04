@@ -1,6 +1,7 @@
 interface IOptions {
   inputFiles: string[],
-  format: string
+  includePaths?: string[],
+  format?: string
 }
 
 interface IDeclaration {

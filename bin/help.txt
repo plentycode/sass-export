@@ -2,9 +2,12 @@ Usage: sass-export [<inputFiles>] [options]
 
 Options:
 
-    --output       -o    <path>, Output file path.
+    --output         -o    File path where to save the JSON exported.
 
-    --structured   -s    If present, it will output an object structured using sections.
-                         Usage: start your code blocks with /** @sass-extract-section="MySection" */.
+    --structured     -s    If present, it will output an object structured file instead of a plain array.
+                           Usage: start your code blocks with /** @sass-extract-section="MySection" */.
 
-    --help,        -h    Outputs this help screen.
+    --dependencies   -d   List of dependencies separated by comma, where Sass will try to find the @imports
+                          that your inputFiles need to work. Example: "libs/, config/, globals/"
+
+    --help,          -h    Outputs this help screen.

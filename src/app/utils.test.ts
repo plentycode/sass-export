@@ -30,4 +30,20 @@ describe('Utils class', () => {
     let result = Utils.getDeclarationByName(declarations, '$purple');
     expect(result).to.be.undefined;
   });
+
+  it('should wrap a variable', () => {
+    let declaration = { variable: 'var', value: '$the-value', compiledValue: '' };
+    let expectedResult = '#sass-export-id.var{content:"#{$the-value}";}';
+    let wrapped = Utils.wrapCss(declaration);
+
+    expect(wrapped).to.be.equal(expectedResult);
+  });
+
+  it('should unwrap the css generated', () => {
+    let compiledCss = '#sass-export-id.var{content:"#{$the-value}";}';
+    let expectedResult = '#{$the-value}';
+    let extracted = Utils.unWrapValue(compiledCss);
+
+    expect(extracted).to.be.equal(expectedResult);
+  });
 });

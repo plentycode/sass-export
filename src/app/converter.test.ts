@@ -109,9 +109,24 @@ describe('Converter class', () => {
 
       // globals
       expect(structured.globals[0]).to.have.property('compiledValue');
-
+      // brand-colors
+      expect(structured['brand-colors'][0]).to.have.property('compiledValue');
+      // darkens
+      expect(structured.darkens[0]).to.have.property('compiledValue');
     });
-
   });
+
+  describe('includePaths support', () => {
+
+    it('should import variables from other files', () => {
+      let opts = { inputFiles: [path.resolve('./test/scss/_with-import.scss')], includePaths: [] };
+      opts.includePaths = [path.resolve('./test/scss/')];
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured.globals[0]).to.have.property('compiledValue');
+    });
+  });
+
 
 });

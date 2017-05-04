@@ -9,11 +9,14 @@ var options = minimist(process.argv.slice(2), {
   alias: {
     o: 'output',
     s: 'structured',
+    d: 'dependencies',
     h: 'help'
   }
 });
 
 var inputFiles = options._;
+
+var includePaths = (options.dependencies || '').split(',');
 
 if (!inputFiles.length || options.help) {
   fs.createReadStream(path.resolve(__dirname, 'help.txt'))
@@ -25,11 +28,12 @@ if (!inputFiles.length || options.help) {
 }
 
 if (!options.output) {
-  options.output = inputFiles[0] + '-sass-exported.json';
+  options.output = inputFiles[0] + '-exported.json';
 }
 
 var exporter = sassExport({
-  inputFiles
+  inputFiles,
+  includePaths
 });
 
 let outputJson = [];
@@ -43,4 +47,5 @@ if (options.structured) {
 outputJson = JSON.stringify(outputJson);
 
 fs.writeFileSync(options.output, outputJson);
+
 console.log(`${options.output} was generated, go check it out!`);
