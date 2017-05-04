@@ -1,7 +1,7 @@
 {
   "name": "sass-export",
-  "version": "0.0.8",
-  "description": "Exports Sass files to Json format",
+  "version": "0.1.0",
+  "description": "Exports Sass files to Json format, and manage section with annotations",
   "main": "./dist/index.js",
   "files": [
     "bin",
@@ -12,14 +12,16 @@
     "dev": "npm run build & npm run test",
     "prepublish": "npm run build",
     "prestart": "npm run build",
-    "watch": "npm run dev -- --watch",
+    "watch": "npm run build -- --watch",
     "test": "mocha -r ts-node/register src/**/*.test.ts"
   },
   "keywords": [
     "Sass",
+    "Scss",
+    "Sass annotations",
     "Sass to JS",
     "Json",
-    "Sass-toJson",
+    "Sass-to-Json",
     "sass variables",
     "Node"
   ],

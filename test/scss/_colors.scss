@@ -1,10 +1,10 @@
-// Generic
+
 $black: #000;
 $slate: #8ca5af;
 $slate-dark: #4f6f7b;
 $gray-medium: #757575;
 
-// Brand
+//@sass-export-section="brand-colors"
 $brand-gray-light: #eceff1;
 $brand-gray-medium: #d6d6d6;
 $brand-gray: #b0bec5;
@@ -12,6 +12,17 @@ $brand-gray-dark: #92989b;
 $brand-blue-light: #9fd1da;
 $brand-blue: #64b5f6;
 $brand-blue-gray: #647b86;
+//@end-sass-export-section
+
+
+//other globals
+$brand-pink: #d70073;
+$brand-purple: #ba68c8;
+$brand-orchid-dark: #6b3b63;
+
+/**
+ * @sass-export-section="other-colors"
+ */
 $brand-blue-gray-dark: #546E7A;
 $brand-solitude: #ebeff2;
 $brand-charcoal-dark: #263238;
@@ -21,6 +32,13 @@ $brand-green: #4b7d2f;
 $brand-green-dark: #78c257;
 $brand-olive: #6ab344;
 $brand-yellow: #ffb74d;
-$brand-pink: #d70073;
-$brand-purple: #ba68c8;
-$brand-orchid-dark: #6b3b63;
+//@end-sass-export-section
+
+
+/**
+ * @sass-export-section="darkens"
+ */
+ $darken-pink: darken($brand-pink, 5%);
+ $darken-purple: darken($brand-purple, 5%);
+
+//@end-sass-export-section

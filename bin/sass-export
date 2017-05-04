@@ -8,6 +8,7 @@ var minimist = require('minimist');
 var options = minimist(process.argv.slice(2), {
   alias: {
     o: 'output',
+    s: 'structured',
     h: 'help'
   }
 });
@@ -27,9 +28,19 @@ if (!options.output) {
   options.output = inputFiles[0] + '-sass-exported.json';
 }
 
-var result = sassExport({
+var exporter = sassExport({
   inputFiles
 });
 
-fs.writeFileSync(options.output, JSON.stringify(result.getArray()));
+let outputJson = [];
+
+if (options.structured) {
+  outputJson = exporter.getStructured();
+} else {
+  outputJson = exporter.getArray();
+}
+
+outputJson = JSON.stringify(outputJson);
+
+fs.writeFileSync(options.output, outputJson);
 console.log(`${options.output} was generated, go check it out!`);

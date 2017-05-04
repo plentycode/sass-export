@@ -1,6 +1,6 @@
 # Sass-Export
-Sass-export is a work in progress project to use Sass files to generate different fortmats you can use in your application as data.
-This is perfect for working on sites doc generation.
+Sass-export is a work in progress project to use Sass files to generate different formats you can use in your application as data.
+This is perfect for working on your site docs generation.
 
 ### Let's get started!
 
@@ -16,10 +16,10 @@ $ npm install -g sass-export
 Ready to export
 
 ```
-$ sass-export path/to/_globals.scss path/to/_colors.scs --output exported-sass.json
+$ sass-export scss/_globals.scss scss/_colors.scs --output exported-sass.json
 ```
 
-### Here some sample output
+### Here's a sample output
 
 [file] _variables.css
 
@@ -57,23 +57,19 @@ Sass-Export has dependencies on these projects:
 
 ### Usage
 
-Usage: sass-export [<inputFiles>] [options]
+Usage: sass-export [inputFiles] [options]
 
 | Options | Description |
 | ------        | ------ |
-| --output, -o  |  <filepath>, Output file path. |
-| --help, -h    |   Outputs this help screen. |
+|  -o, --output  |   File path where to save the JSON exported. |
+|  -h, --help    |   Shows up this help screen. |
 
 License
 ----
 
 ISC
 
+[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
-**It's for free!**
-
-[//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
-
-
-   [node.js]: <http://nodejs.org>
-   [node-sass]: <https://github.com/sass/node-sass>
+[node.js]: <http://nodejs.org>
+[node-sass]: <https://github.com/sass/node-sass>
