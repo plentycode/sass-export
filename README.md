@@ -4,6 +4,7 @@ This is perfect for site documentation generation process.
 
 ### Let's get started!
 
+
 #### CLI
 Install it from NPM
 
@@ -14,7 +15,7 @@ $ npm install -g sass-export
 Ready to export:
 
 ```
-$ sass-export scss/_globals.scss scss/_colors.scs --output exported-sass.json
+$ sass-export _globals.scss _colors.scs --output exported-sass.json
 ```
 
 ### Here's a sample output
@@ -39,7 +40,7 @@ $ sass-export scss/_globals.scss scss/_colors.scs --output exported-sass.json
   { "variable": "$base-value", "value": "25px", "compiledValue": "25px" },
   { "variable": "$gray-dark", "value": "darken($gray-medium, 5%)", "compiledValue" :"#686868" },
   { "variable": "$logo", "value": "url(logo.svg)", "compiledValue": "url(logo.svg)" },
-  { "variable": "$logo-quotes", "value": "url('logo.svg')", "compiledValue": "url(\"sample.svg\")" },
+  { "variable": "$logo-quotes", "value": "url('logo.svg')", "compiledValue": "url(\"logo.svg\")" },
   { "variable": "$calculation", "value": "$base-value - 12px", "compiledValue": "13px" },
   { "variable": "$multiple-calculations", "value": "$base-value - floor(12.5px)", "compiledValue": "13px" }
 ]
@@ -69,7 +70,7 @@ $font-size: 16px;
 $font-color: $brand-gray-medium;
 //@end-sass-export-section
 
-$global-group: red;
+$global-group: #FF0000;
 ```
 
 Then we run sass-export, don't forget to include **--structured** flag:
@@ -98,28 +99,68 @@ exported-grouped.json
 }
 ```
 
-### Include Paths for @imports
-In order to support @imports we need to include **--dependencies** parameter with a comma separated list of the folder path to include:
+### Include Paths for @import
+In order to support @import we need to include **--dependencies** parameter with a comma separated list of the folder path to include:
 ```
-$ sass-export scss/_fonts.scss -o=exported-dependencies.json -s -d="src/sass/config/, src/sass/libs/"
+$ sass-export scss/_fonts.scss -o=exported-dependencies.json -s -d "src/sass/config/, src/sass/libs/"
 ```
 
 in order to use:
+
 ``` scss
 @import "breakpoints";
 @import "globals";
 
-$imported-value: $bp-desktop
+$imported-value: $bp-desktop;
 $font-size: $global-font-size;
 ````
 
+## Want to use it in your Node App?
+Just import it!
+
+Old way:
+``` javascript
+var exporter = require('sass-export').default;
+```
+
+New fancy way:
+
+``` javascript
+ import exporter from { 'sass-export' };
+```
+
+
+#### Example:
+
+Written using ES5 syntax and  using nodeJs v4.0.0. it is compatible!
+``` javascript
+// sass-export module it is wrapped in a 'default' property
+var exporter = require('sass-export').default;
+
+//basic options
+var options = {
+  inputFiles: ['_variables.scss', '_fonts.scss'],
+  includePaths: ['libs/'] //don't forget this is the folder path not the files
+};
+
+// you can get an object {globals:[], colors: []}
+var asObject = exporter(options).getStructured();
+
+console.log(asObject.globals);
+console.log(asObject.colors);
+
+// or get an array [{}, {}]
+var asArray = exporter(options).getArray();
+console.log(asArray)
+```
+
 ### Tech Dependencies
-Sass-Export requires [Node.js](https://nodejs.org/) v5+ to run.
+We recommend using [Node.js](https://nodejs.org/) v4+.
 
 
 Has dependencies on these projects:
 
-* [node.js] - evented I/O for the backend
+* [node.js] - evented I/O for the backend.
 * [Node-Sass] - library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass.
 
 ### Usage

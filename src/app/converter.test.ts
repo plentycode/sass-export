@@ -61,6 +61,7 @@ describe('Converter class', () => {
       expect(foundDeclaration.value).to.equal('lighten(#123, 10%)');
       expect(foundDeclaration.compiledValue).to.equal('#1e3c59');
     });
+
   });
 
   describe('Multiple input files', () => {

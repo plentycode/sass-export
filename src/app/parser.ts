@@ -24,7 +24,11 @@ class Parser {
 
     for (let match of matches) {
       if (!this.checkIsSectionStart(match) && !this.checkIsSectionStart(match)) {
-        declarations.push(this.parseSingleDecaration(match));
+        let parsed = this.parseSingleDecaration(match);
+
+        if (parsed) {
+          declarations.push(parsed);
+        }
       }
     }
 
@@ -44,7 +48,7 @@ class Parser {
     declarations[currentSection] = [];
 
     for (let match of matches) {
-      if  (this.checkIsSectionStart(match)) {
+      if (this.checkIsSectionStart(match)) {
         let sectionName = String(new RegExp(SECTION_PATTERN, 'gi').exec(match)[2]);
 
         if (sectionName) {
@@ -54,7 +58,11 @@ class Parser {
       } else if (this.checkIsSectionEnd(match)) {
         currentSection = DEFAULT_SECTION;
       } else {
-        declarations[currentSection].push(this.parseSingleDecaration(match));
+        let parsed = this.parseSingleDecaration(match);
+
+        if (parsed) {
+          declarations[currentSection].push(parsed);
+        }
       }
     }
 

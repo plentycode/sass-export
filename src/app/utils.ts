@@ -21,8 +21,15 @@ class Utils {
 
 
   public static unWrapValue(wrappedContent: string): string {
+    wrappedContent = wrappedContent.replace(/\s/g, '');
+
     let matches = wrappedContent.match(UNWRAPPER_PATTERN);
-    return matches[2].trim();
+
+    if (matches && matches.length > 2) {
+      return matches[2].trim();
+    } else {
+      return '';
+    }
   }
 }
 

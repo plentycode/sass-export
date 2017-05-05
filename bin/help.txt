@@ -10,4 +10,6 @@ Options:
     --dependencies   -d   List of dependencies separated by comma, where Sass will try to find the @imports
                           that your inputFiles need to work. Example: "libs/, config/, globals/"
 
+    --version       -v    Current working version.
+
     --help,          -h    Outputs this help screen.

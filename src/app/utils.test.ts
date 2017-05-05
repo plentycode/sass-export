@@ -46,4 +46,13 @@ describe('Utils class', () => {
 
     expect(extracted).to.be.equal(expectedResult);
   });
+
+  it('should not break with white spaces an break lines', () => {
+    let compiledCss = '#sass-export-id.font-size {         content: "16px \n" \n;}';
+    let expectedResult = '16px';
+    let extracted = Utils.unWrapValue(compiledCss);
+
+    expect(extracted).to.be.equal(expectedResult);
+
+  });
 });

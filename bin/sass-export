@@ -10,13 +10,17 @@ var options = minimist(process.argv.slice(2), {
     o: 'output',
     s: 'structured',
     d: 'dependencies',
-    h: 'help'
+    h: 'help',
+    v: 'version'
   }
 });
 
 var inputFiles = options._;
 
-var includePaths = (options.dependencies || '').split(',');
+if (options.version) {
+  console.log(require('../package.json').version);
+  return;
+}
 
 if (!inputFiles.length || options.help) {
   fs.createReadStream(path.resolve(__dirname, 'help.txt'))
@@ -31,12 +35,14 @@ if (!options.output) {
   options.output = inputFiles[0] + '-exported.json';
 }
 
+var includePaths = (options.dependencies || '').split(',');
+
 var exporter = sassExport({
   inputFiles,
   includePaths
 });
 
-let outputJson = [];
+var outputJson = [];
 
 if (options.structured) {
   outputJson = exporter.getStructured();
