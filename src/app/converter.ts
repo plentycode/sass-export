@@ -55,7 +55,7 @@ class Converter {
 
   private renderPropertyValue(content: string, declaration: IDeclaration): string {
     let rendered = sass.renderSync({
-      data: content + Utils.wrapCss(declaration),
+      data: content + '\n' + Utils.wrapCss(declaration),
       includePaths: this.options.includePaths,
       outputStyle: 'compact'
     });
