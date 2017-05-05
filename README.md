@@ -2,7 +2,7 @@
 Sass-export helps you to use Sass files to generate a JSON file you can use in your application as data.
 This is perfect for site documentation generation process.
 
-# Let's get started!
+### Let's get started!
 
 
 #### CLI
