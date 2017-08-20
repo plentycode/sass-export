@@ -4,6 +4,8 @@
     "module": "commonjs",
     "outDir": "./dist",
     "rootDir": "./src",
+    "declaration": true,
+    "declarationDir": "./dist/declarations",
     "removeComments": true,
     "newLine": "LF"
   },

@@ -1,6 +1,6 @@
 {
   "name": "sass-export",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Exports Sass files to Json format, able to manage sections with annotations in comments.",
   "main": "./dist/index.js",
   "files": [
@@ -19,12 +19,12 @@
     "Sass",
     "Sass Utilities",
     "Scss",
-    "Sass annotations",
+    "Sass Annotations",
     "Sass to JS",
-    "Json",
-    "Sass-to-Json",
-    "sass variables",
-    "Node"
+    "Scss Json",
+    "Sass to Json",
+    "sass variables exporting",
+    "Node Sass"
   ],
   "author": {
     "name": "Carlos I Mercado",
@@ -35,12 +35,14 @@
   },
   "license": "ISC",
   "dependencies": {
+    "@types/firebase": "^2.4.31",
+    "@types/sendgrid": "^4.3.0",
     "minimist": "^1.2.0",
     "node-sass": "^4.5.2"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/civan/sass-export.git"
+    "url": "https://github.com/plentycode/sass-export.git"
   },
   "devDependencies": {
     "@types/chai": "^3.5.2",

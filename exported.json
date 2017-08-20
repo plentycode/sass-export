@@ -1,0 +1,48 @@
+{
+  "globals": [
+    {
+      "variable": "$black",
+      "value": "#000",
+      "compiledValue": "#000"
+    },
+    {
+      "variable": "$slate",
+      "value": "#8ca5af",
+      "compiledValue": "#8ca5af"
+    },
+    {
+      "variable": "$global-group",
+      "value": "#ff0000",
+      "compiledValue": "#ff0000"
+    }
+  ],
+  "brand-colors": [
+    {
+      "variable": "$brand-gray-light",
+      "value": "#eceff1",
+      "compiledValue": "#eceff1"
+    },
+    {
+      "variable": "$brand-gray-medium",
+      "value": "#d6d6d6",
+      "compiledValue": "#d6d6d6"
+    },
+    {
+      "variable": "$brand-gray",
+      "value": "#b0bec5",
+      "compiledValue": "#b0bec5"
+    }
+  ],
+  "fonts": [
+    {
+      "variable": "$font-size",
+      "value": "16px",
+      "compiledValue": "16px"
+    },
+    {
+      "variable": "$font-color",
+      "value": "$brand-gray-medium",
+      "compiledValue": "#d6d6d6"
+    }
+  ]
+}
