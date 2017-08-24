@@ -1,0 +1,127 @@
+[
+  {
+    "variable": "$black",
+    "value": "#000",
+    "compiledValue": "#000"
+  },
+  {
+    "variable": "$slate",
+    "value": "#8ca5af",
+    "compiledValue": "#8ca5af"
+  },
+  {
+    "variable": "$slate-dark",
+    "value": "#4f6f7b",
+    "compiledValue": "#4f6f7b"
+  },
+  {
+    "variable": "$gray-medium",
+    "value": "#757575",
+    "compiledValue": "#757575"
+  },
+  {
+    "variable": "$brand-gray-light",
+    "value": "#eceff1",
+    "compiledValue": "#eceff1"
+  },
+  {
+    "variable": "$brand-gray-medium",
+    "value": "#d6d6d6",
+    "compiledValue": "#d6d6d6"
+  },
+  {
+    "variable": "$brand-gray",
+    "value": "#b0bec5",
+    "compiledValue": "#b0bec5"
+  },
+  {
+    "variable": "$brand-gray-dark",
+    "value": "#92989b",
+    "compiledValue": "#92989b"
+  },
+  {
+    "variable": "$brand-blue-light",
+    "value": "#9fd1da",
+    "compiledValue": "#9fd1da"
+  },
+  {
+    "variable": "$brand-blue",
+    "value": "#64b5f6",
+    "compiledValue": "#64b5f6"
+  },
+  {
+    "variable": "$brand-blue-gray",
+    "value": "#647b86",
+    "compiledValue": "#647b86"
+  },
+  {
+    "variable": "$brand-pink",
+    "value": "#d70073",
+    "compiledValue": "#d70073"
+  },
+  {
+    "variable": "$brand-purple",
+    "value": "#ba68c8",
+    "compiledValue": "#ba68c8"
+  },
+  {
+    "variable": "$brand-orchid-dark",
+    "value": "#6b3b63",
+    "compiledValue": "#6b3b63"
+  },
+  {
+    "variable": "$brand-blue-gray-dark",
+    "value": "#546E7A",
+    "compiledValue": "#546E7A"
+  },
+  {
+    "variable": "$brand-solitude",
+    "value": "#ebeff2",
+    "compiledValue": "#ebeff2"
+  },
+  {
+    "variable": "$brand-charcoal-dark",
+    "value": "#263238",
+    "compiledValue": "#263238"
+  },
+  {
+    "variable": "$brand-cyan",
+    "value": "#84ffff",
+    "compiledValue": "#84ffff"
+  },
+  {
+    "variable": "$brand-green-light",
+    "value": "#9ccc65",
+    "compiledValue": "#9ccc65"
+  },
+  {
+    "variable": "$brand-green",
+    "value": "#4b7d2f",
+    "compiledValue": "#4b7d2f"
+  },
+  {
+    "variable": "$brand-green-dark",
+    "value": "#78c257",
+    "compiledValue": "#78c257"
+  },
+  {
+    "variable": "$brand-olive",
+    "value": "#6ab344",
+    "compiledValue": "#6ab344"
+  },
+  {
+    "variable": "$brand-yellow",
+    "value": "#ffb74d",
+    "compiledValue": "#ffb74d"
+  },
+  {
+    "variable": "$darken-pink",
+    "value": "darken($brand-pink, 5%)",
+    "compiledValue": "#be0065"
+  },
+  {
+    "variable": "$darken-purple",
+    "value": "darken($brand-purple, 5%)",
+    "compiledValue": "#b155c1"
+  }
+]

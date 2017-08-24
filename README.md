@@ -118,24 +118,26 @@ $font-size: $global-font-size;
 ## Want to use it in your Node App?
 Just import it!
 
-Old way:
+Require syntax:
 ``` javascript
-var exporter = require('sass-export').default;
+var exporter = require('sass-export').exporter;
+
+var exporterBuffer = require('sass-export').buffer;
 ```
 
 New fancy way:
 
 ``` javascript
- import exporter from { 'sass-export' };
+ import { exporter } from 'sass-export';
 ```
 
 
 #### Example:
 
-Written using ES5 syntax and  using nodeJs v4.0.0. it is compatible!
+Written using ES5 syntax.
 ``` javascript
-// sass-export module it is wrapped in a 'default' property
-var exporter = require('sass-export').default;
+
+var exporter = require('sass-export').exporter;
 
 //basic options
 var options = {
@@ -155,7 +157,7 @@ console.log(asArray)
 ```
 
 ### Tech Dependencies
-We recommend using [Node.js](https://nodejs.org/) v4+.
+We recommend using [Node.js](https://nodejs.org/) v6+.
 
 
 Has dependencies on these projects:
@@ -175,9 +177,11 @@ Usage: sass-export [inputFiles] [options]
 |  -h, --help           |   Boolean   |  Shows up this help screen. |
 
 
+### New utilities
+  * Gulp plugin: [gulp-sass-export]
+
 ### More to come soon:
   * Import/require module documentation
-  * Gulp plugin
   * Include/Exclude annotations.
   * Demo Page
 
@@ -191,3 +195,4 @@ ISC
 
 [node.js]: <http://nodejs.org>
 [node-sass]: <https://github.com/sass/node-sass>
+[gulp-sass-export]: <https://github.com/plentycode/gulp-sass-export>

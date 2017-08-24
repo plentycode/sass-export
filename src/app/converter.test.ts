@@ -32,7 +32,7 @@ describe('Converter class', () => {
     let results = null;
 
     // tslint:disable-next-line:only-arrow-functions
-    before(function () {
+    before(function() {
       converter = new Converter(opts);
       results = converter.getArray();
 

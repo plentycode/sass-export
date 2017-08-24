@@ -7,14 +7,15 @@
     "no-bitwise": true,
     "quotemark": ["single"],
     "no-conditional-assignment": true,
-    "no-consecutive-blank-lines": [],
     "prefer-const": false,
     "trailing-comma": [false],
-    "object-literal-sort-keys":false,
-    "ordered-imports": false,
+    "object-literal-sort-keys": false,
+    "ordered-imports": [false],
     "no-unused-expression": false,
-    "no-console": [
-      false
-    ]
+    "no-consecutive-blank-lines": [true, 2],
+    "no-console": [false],
+    "compilerOptions": {
+      "lib": ["es6"]
+    }
   }
 }
