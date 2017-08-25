@@ -1,5 +1,6 @@
 import * as fs from 'fs';
 import * as sass from 'node-sass';
+import * as glob from 'glob';
 import Parser from './parser';
 import Utils from './utils';
 
@@ -66,7 +67,16 @@ class Converter {
 
 
   private getContent(): string {
-    let contents = this.options.inputFiles.map((path) => fs.readFileSync(path).toString());
+    let inputs = [];
+
+    this.options.inputFiles.forEach((path) => {
+      let files = glob.sync(String(path));
+      inputs.push(...files);
+    });
+
+    let contents = inputs.map((filePath) => {
+      return fs.readFileSync(filePath).toString();
+    });
 
     return contents.join('\n');
   }

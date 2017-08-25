@@ -70,7 +70,7 @@ describe('Converter class', () => {
     let results = null;
 
     // tslint:disable-next-line:only-arrow-functions
-    before(function () {
+    before(function() {
       opts.inputFiles.push(path.resolve('./test/scss/_colors.scss'));
       opts.inputFiles.push(path.resolve('./test/scss/_breakpoints.scss'));
 
@@ -127,6 +127,17 @@ describe('Converter class', () => {
 
       expect(structured.globals[0]).to.have.property('compiledValue');
     });
+  });
+
+  describe('path patterns support', () => {
+    it('should read a wildcard', () => {
+      let opts = { inputFiles: [path.resolve('./test/scss/patterns/*')], includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured.globals[0]).to.have.property('compiledValue');
+    });
+
   });
 
 
