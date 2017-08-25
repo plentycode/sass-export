@@ -35,8 +35,6 @@
   },
   "license": "ISC",
   "dependencies": {
-    "@types/firebase": "^2.4.31",
-    "@types/sendgrid": "^4.3.0",
     "minimist": "^1.2.0",
     "node-sass": "^4.5.2"
   },
