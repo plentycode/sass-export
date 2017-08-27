@@ -2,6 +2,11 @@ import { Converter } from './converter';
 import { Parser } from '../parser';
 import { Utils } from '../utils';
 
+const Types = {
+  STRUCTURED: 'structured',
+  ARRAY: 'array'
+};
+
 export class ConverterBuffer extends Converter {
   private inputBuffers: Buffer[];
 
@@ -11,10 +16,10 @@ export class ConverterBuffer extends Converter {
   }
 
   public getData(): Promise<any> {
-    if (this.options && this.options.type === 'array') {
-     return Promise.resolve(this.getArray());
+    if (this.options && this.options.type === Types.ARRAY) {
+      return Promise.resolve(this.getArray());
     } else {
-     return Promise.resolve(this.getStructured());
+      return Promise.resolve(this.getStructured());
     }
   }
 
