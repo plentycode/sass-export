@@ -13,7 +13,7 @@ $ npm install -g sass-export
 Ready to export:
 
 ```
-$ sass-export scss/config/*.scss -o styles-array-data.json
+$ sass-export scss/config/*.scss -o exported-sass-array.json
 ```
 
 ### Here's a sample output
@@ -30,7 +30,7 @@ _input:_ _variables.css
   $multiple-calculations: $base-value - floor(12.5px);
 ```
 
-_output_: [styles-array-data.json] [exported-array.json]
+_output_: [exported-sass-array.json]
 
 ``` javascript
 [
@@ -77,7 +77,7 @@ $ sass-export scss/_annotations.scss -o exported-grouped.json -s
 ```
 
 
-_output_ [exported-grouped.json] [exported-annotations]
+_output_ [exported-grouped.json]
 ``` javascript
 {
     "globals": [
@@ -124,7 +124,7 @@ $breakpoints: (
   large: 1200px
 );
 ```
-_output:_ [exported-maps.json] [exported-maps]
+_output:_ [exported-maps.json]
 
 ```javascript
 {
@@ -223,6 +223,6 @@ ISC
 [node.js]: <http://nodejs.org>
 [node-sass]: <https://github.com/sass/node-sass>
 [gulp-sass-export]: <https://github.com/plentycode/gulp-sass-export>
-[exported-array.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/array.json>
-[exported-annotations]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/annotations.json>
-[exported-maps]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/maps-object.json>
+[exported-sass-array.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/array.json>
+[exported-grouped.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/annotations.json>
+[exported-maps.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/maps-object.json>
