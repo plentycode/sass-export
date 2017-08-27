@@ -3,6 +3,8 @@ const VALUE_PATERN = '[^;"]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
 const DECLARATION_PATTERN =
   `\\$'?(${VARIABLE_PATERN})'?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
 
+const MAP_DECLARATIOM_REGEX =  /'?((?!\d)[\w_-][\w\d_-]*)'?\s*:\s*([^,)"]+)/gi;
+
 const SECTION_TAG = 'sass-export-section';
 const SECTION_PATTERN = `(@${SECTION_TAG}=)(".+")`;
 const END_SECTION_PATTERN = `(@end-${SECTION_TAG})`;
@@ -10,7 +12,7 @@ const END_SECTION_PATTERN = `(@end-${SECTION_TAG})`;
 const DEFAULT_SECTION = 'globals';
 
 
-class Parser {
+export class Parser {
   private rawContent: string;
 
   constructor(rawContent: string) {
@@ -27,6 +29,13 @@ class Parser {
         let parsed = this.parseSingleDecaration(match);
 
         if (parsed) {
+          let map = this.extractMapDeclarations(parsed.value);
+
+          // in case the variable is a sass map
+          if (map.length) {
+            parsed.mapValue = map.map((declaration) => this.parseSingleDecaration(`$${declaration};`));
+          }
+
           declarations.push(parsed);
         }
       }
@@ -61,6 +70,13 @@ class Parser {
         let parsed = this.parseSingleDecaration(match);
 
         if (parsed) {
+          let map = this.extractMapDeclarations(parsed.value);
+
+          // in case the variable is a sass map
+          if (map.length) {
+            parsed.mapValue = map.map((declaration) => this.parseSingleDecaration(`$${declaration};`));
+          }
+
           declarations[currentSection].push(parsed);
         }
       }
@@ -83,6 +99,16 @@ class Parser {
 
   private extractDeclarations(content: string): [any] {
     const matches = content.match(new RegExp(DECLARATION_PATTERN, 'g'));
+
+    if (!matches) {
+      return [] as any;
+    }
+
+    return matches as any;
+  }
+
+  private extractMapDeclarations(content: string): [any] {
+    const matches = content.match(new RegExp(MAP_DECLARATIOM_REGEX, 'g'));
 
     if (!matches) {
       return [] as any;
@@ -117,6 +143,3 @@ class Parser {
     return (new RegExp(END_SECTION_PATTERN, 'gi')).test(content);
   }
 }
-
-
-export default Parser;

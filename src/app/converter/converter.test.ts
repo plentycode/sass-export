@@ -1,9 +1,7 @@
-import Converter from './converter';
-import Utils from './utils';
 import * as path from 'path';
-
 import { expect } from 'chai';
-
+import { Converter } from './converter';
+import { Utils } from '../utils';
 
 describe('Converter class', () => {
   let options = { inputFiles: [''], format: 'JSON' };
@@ -131,13 +129,42 @@ describe('Converter class', () => {
 
   describe('path patterns support', () => {
     it('should read a wildcard', () => {
-      let opts = { inputFiles: [path.resolve('./test/scss/patterns/*')], includePaths: [] };
+      let opts = { inputFiles: path.resolve('./test/scss/patterns/*'), includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured.globals[0]).to.have.property('compiledValue');
+    });
+  });
+
+  describe('map support', () => {
+    it('it should work even if input files is not an array', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
       let converter = new Converter(opts);
       let structured = converter.getStructured();
 
       expect(structured.globals[0]).to.have.property('compiledValue');
     });
 
+    it('it should compile values inside a map', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured.globals[0]).to.have.property('compiledValue');
+      expect(structured.globals[0]).to.have.property('mapValue');
+      expect(structured.globals[0].mapValue[0]).to.have.property('compiledValue');
+    });
+
+    it('it should compile values inside a map as array also', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let result = converter.getArray();
+
+      expect(result[0]).to.have.property('compiledValue');
+      expect(result[0]).to.have.property('mapValue');
+      expect(result[0].mapValue[0]).to.have.property('compiledValue');
+    });
   });
 
 

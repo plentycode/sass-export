@@ -1,5 +1,5 @@
-import Parser from './parser';
-import Utils from './utils';
+import { Parser } from './parser';
+import { Utils } from '../utils';
 import { expect } from 'chai';
 
 describe('Parser class', () => {
@@ -137,6 +137,53 @@ describe('Parser class', () => {
 
       expect(structured.first.length).be.equal(3);
       expect(structured.first[2].variable).be.equal('brand-gray-3');
+    });
+  });
+
+  describe('maps support', () => {
+    it('should parse a map into an array', () => {
+      let content = `$breakpoints: (
+        small: 767px,
+        medium: 992px,
+        large: 1200px
+      );`;
+
+      let parser = new Parser(content);
+      let structured = parser.parseStructured();
+
+      expect(structured.globals[0].mapValue).that.is.an('array');
+    });
+
+    it('should have a structured result', () => {
+      let content = `$breakpoints: (
+        small: 767px,
+        medium: $bp-medium,
+        large: 1200px
+      );`;
+
+      let parser = new Parser(content);
+      let structured = parser.parseStructured();
+
+      expect(structured.globals[0].mapValue[0].variable).be.equal('small');
+      expect(structured.globals[0].mapValue[0].value).be.equal('767px');
+
+      expect(structured.globals[0].mapValue[1].value).be.equal('$bp-medium');
+    });
+
+    it('should have a structured result for array type', () => {
+      let content = `$breakpoints: (
+        small: 767px,
+        medium: $bp-medium,
+        large: 1200px
+      );`;
+
+      let parser = new Parser(content);
+      let parsedArray = parser.parse();
+
+      expect(parsedArray[0].mapValue[0].variable).be.equal('small');
+      expect(parsedArray[0].mapValue[0].value).be.equal('767px');
+
+      expect(parsedArray[0].mapValue[1].value).be.equal('$bp-medium');
     });
   });
 });

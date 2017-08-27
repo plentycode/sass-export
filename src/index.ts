@@ -1,5 +1,4 @@
-import Converter from './app/converter';
-import { ConverterBuffer } from './app/converter-buffer';
+import { Converter, ConverterBuffer } from './app/converter';
 
 let sassExporter = (options: IOptions) => {
   return new Converter(options);
