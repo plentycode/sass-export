@@ -6,7 +6,7 @@ const UNWRAPPER_PATTERN = `${WRAPPER_CSS_ID}\\.(.+)\\s*\\{\\s*content:\\s*["'](.
  * Class for static utility functions
  * Usage: Utils.staticFunction
  */
-class Utils {
+export class Utils {
 
   public static getDeclarationByName(declarations: IDeclaration[] = [], name: string): IDeclaration {
     let filtered = declarations.filter((declaration) => declaration.variable === name);
@@ -32,5 +32,3 @@ class Utils {
     }
   }
 }
-
-export default Utils;

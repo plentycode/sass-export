@@ -1,8 +1,6 @@
 # Sass-Export
-Sass-export helps you to use Sass files to generate a JSON file you can use in your application as data.
-This is perfect for site documentation generation process.
-
-### Let's get started!
+**Sass-export** takes SCSS files and export them to a JSON file you can use as data.
+This is perfect for generating your site documentation.
 
 
 #### CLI
@@ -15,7 +13,7 @@ $ npm install -g sass-export
 Ready to export:
 
 ```
-$ sass-export _globals.scss _colors.scs --output exported-sass.json
+$ sass-export scss/config/*.scss -o styles-data.json
 ```
 
 ### Here's a sample output
@@ -47,7 +45,7 @@ $ sass-export _globals.scss _colors.scs --output exported-sass.json
 ```
 
 ### Section Groups Annotations
-From version 0.0.1 basic annotations are supported to split files into sections:
+You can easily organize your variables into a Javascript object using sass-export annotations:
 
 [input] _annotations.scss
 
@@ -75,7 +73,7 @@ $global-group: #FF0000;
 
 Then we run sass-export, don't forget to include **--structured** flag:
 ```
-$ sass-export scss/_annotations.scss -o=exported-grouped.json -s
+$ sass-export scss/_annotations.scss -o exported-grouped.json -s
 ```
 
 
