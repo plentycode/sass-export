@@ -1,0 +1,73 @@
+{
+  "globals": [
+    {
+      "variable": "$breakpoints",
+      "value": "(small: 767px,\n  medium: 992px,\n  large: 1200px\n)",
+      "mapValue": [
+        {
+          "variable": "small",
+          "value": "767px",
+          "compiledValue": "767px"
+        },
+        {
+          "variable": "medium",
+          "value": "992px",
+          "compiledValue": "992px"
+        },
+        {
+          "variable": "large",
+          "value": "1200px",
+          "compiledValue": "1200px"
+        }
+      ],
+      "compiledValue": "(small:767px,medium:992px,large:1200px)"
+    },
+    {
+      "variable": "$bp-mobile",
+      "value": "320px",
+      "compiledValue": "320px"
+    },
+    {
+      "variable": "$bp-tablet",
+      "value": "600px",
+      "compiledValue": "600px"
+    },
+    {
+      "variable": "$bp-desktop",
+      "value": "1000px",
+      "compiledValue": "1000px"
+    },
+    {
+      "variable": "$bp-large-desktop",
+      "value": "1440px",
+      "compiledValue": "1440px"
+    },
+    {
+      "variable": "$bps",
+      "value": "('mobile': $bp-mobile,\n  'tablet': $bp-tablet,\n  'desktop': $bp-desktop,\n  'large-desktop': $bp-large-desktop\n)",
+      "mapValue": [
+        {
+          "variable": "mobile",
+          "value": "$bp-mobile",
+          "compiledValue": "320px"
+        },
+        {
+          "variable": "tablet",
+          "value": "$bp-tablet",
+          "compiledValue": "600px"
+        },
+        {
+          "variable": "desktop",
+          "value": "$bp-desktop",
+          "compiledValue": "1000px"
+        },
+        {
+          "variable": "large-desktop",
+          "value": "$bp-large-desktop",
+          "compiledValue": "1440px"
+        }
+      ],
+      "compiledValue": "(\"mobile\":320px,\"tablet\":600px,\"desktop\":1000px,\"large-desktop\":1440px)"
+    }
+  ]
+}

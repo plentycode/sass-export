@@ -10,14 +10,3 @@ $bps: (
   'desktop': $bp-desktop,
   'large-desktop': $bp-large-desktop
 );
-
-$breakpoints: (
-  'mobile' '(max-width: #{(map-get($bps, tablet)) - 1})',
-  'tablet' '(min-width: #{map-get($bps, tablet)})',
-  'desktop' '(min-width: #{map-get($bps, desktop)})',
-  'large-desktop' '(min-width: #{map-get($bps, large-desktop)})'
-);
-
-$breakpoint-has-widths: ('mobile', 'tablet', 'desktop', 'large-desktop');
-$breakpoint-has-push: ('mobile', 'tablet', 'desktop', 'large-desktop');
-$breakpoint-has-pull: ('mobile', 'tablet', 'desktop', 'large-desktop');

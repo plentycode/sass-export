@@ -11,7 +11,8 @@ const LINE_BREAK = '\n';
  * @param {IOptions} options options parameters
  */
 export class Converter {
-  constructor( public options?: IOptions) {
+
+  constructor(public options?: IOptions) {
     this.options = options || {} as IOptions;
   }
 
@@ -22,6 +23,13 @@ export class Converter {
     return parsedDeclarations.map((declaration) => {
       declaration.compiledValue = this.renderPropertyValue(content, declaration);
       declaration.variable = `$${declaration.variable}`;
+
+      if (declaration.mapValue) {
+        declaration.mapValue.map((mapDeclaration) => {
+          mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration);
+          return mapDeclaration;
+        });
+      }
       return declaration;
     });
   }

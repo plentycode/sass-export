@@ -29,6 +29,13 @@ export class Parser {
         let parsed = this.parseSingleDecaration(match);
 
         if (parsed) {
+          let map = this.extractMapDeclarations(parsed.value);
+
+          // in case the variable is a sass map
+          if (map.length) {
+            parsed.mapValue = map.map((declaration) => this.parseSingleDecaration(`$${declaration};`));
+          }
+
           declarations.push(parsed);
         }
       }

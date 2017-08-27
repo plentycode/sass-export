@@ -155,6 +155,16 @@ describe('Converter class', () => {
       expect(structured.globals[0]).to.have.property('mapValue');
       expect(structured.globals[0].mapValue[0]).to.have.property('compiledValue');
     });
+
+    it('it should compile values inside a map as array also', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let result = converter.getArray();
+
+      expect(result[0]).to.have.property('compiledValue');
+      expect(result[0]).to.have.property('mapValue');
+      expect(result[0].mapValue[0]).to.have.property('compiledValue');
+    });
   });
 
 
