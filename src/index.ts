@@ -6,7 +6,7 @@ let sassExporter = (options: IOptions) => {
 
 let bufferExporter = (input: Buffer[], options: IOptions) => {
   let converter = new ConverterBuffer(input, options);
-  return converter.getStructured();
+  return converter.getData();
 };
 
 module.exports = {
