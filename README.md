@@ -13,12 +13,12 @@ $ npm install -g sass-export
 Ready to export:
 
 ```
-$ sass-export scss/config/*.scss -o styles-data.json
+$ sass-export scss/config/*.scss -o styles-array-data.json
 ```
 
 ### Here's a sample output
 
-[file] _variables.css
+_input:_ _variables.css
 
 ``` scss
   $gray-medium: #757575;
@@ -30,7 +30,7 @@ $ sass-export scss/config/*.scss -o styles-data.json
   $multiple-calculations: $base-value - floor(12.5px);
 ```
 
-[output]  exported-sass.json
+_output_: [styles-array-data.json] [exported-array.json]
 
 ``` javascript
 [
@@ -47,7 +47,7 @@ $ sass-export scss/config/*.scss -o styles-data.json
 ### Section Groups Annotations
 You can easily organize your variables into a Javascript object using sass-export annotations:
 
-[input] _annotations.scss
+_input:_ _annotations.scss
 
 ``` scss
 $black: #000;
@@ -77,23 +77,23 @@ $ sass-export scss/_annotations.scss -o exported-grouped.json -s
 ```
 
 
-exported-grouped.json
+_output_ [exported-grouped.json] [exported-annotations]
 ``` javascript
 {
-"globals": [
-    { "variable": "$black", "value": "#000", "compiledValue": "#000" },
-    { "variable": "$slate", "value": "#8ca5af", "compiledValue": "#8ca5af" },
-    { "variable": "$global-group", "value": "#ff0000", "compiledValue": "#ff0000" }
-],
-"brand-colors": [
-    { "variable": "$brand-gray-light", "value": "#eceff1", "compiledValue":"#eceff1" },
-    { "variable": "$brand-gray-medium", "value": "#d6d6d6" ,"compiledValue":"#d6d6d6" },
-    { "variable": "$brand-gray", "value": "#b0bec5", "compiledValue": "#b0bec5" }
-],
-"fonts": [
-    { "variable": "$font-size", "value": "16px", "compiledValue": "16px" },
-    { "variable": "$font-color", "value": "$brand-gray-medium", "compiledValue":"#d6d6d6" }
-]
+    "globals": [
+        { "variable": "$black", "value": "#000", "compiledValue": "#000" },
+        { "variable": "$slate", "value": "#8ca5af", "compiledValue": "#8ca5af" },
+        { "variable": "$global-group", "value": "#ff0000", "compiledValue": "#ff0000" }
+    ],
+    "brand-colors": [
+        { "variable": "$brand-gray-light", "value": "#eceff1", "compiledValue":"#eceff1" },
+        { "variable": "$brand-gray-medium", "value": "#d6d6d6" ,"compiledValue":"#d6d6d6" },
+        { "variable": "$brand-gray", "value": "#b0bec5", "compiledValue": "#b0bec5" }
+    ],
+    "fonts": [
+        { "variable": "$font-size", "value": "16px", "compiledValue": "16px" },
+        { "variable": "$font-color", "value": "$brand-gray-medium", "compiledValue":"#d6d6d6" }
+    ]
 }
 ```
 
@@ -113,6 +113,36 @@ $imported-value: $bp-desktop;
 $font-size: $global-font-size;
 ````
 
+### Map support
+In case you wanted your sass Maps variable to be an array we included te **mapValue** property for variables identified as maps.
+
+_input:_ _breackpoints.scss
+``` scss
+$breakpoints: (
+  small: 767px,
+  medium: 992px,
+  large: 1200px
+);
+```
+_output:_ [exported-maps.json] [exported-maps]
+
+```javascript
+{
+  "globals": [
+    {
+      "variable": "$breakpoints",
+      "value": "(small: 767px,\n  medium: 992px,\n  large: 1200px\n)",
+      "mapValue": [
+        { "variable": "small", "value": "767px", "compiledValue": "767px" },
+        { "variable": "medium","value": "992px", "compiledValue": "992px" },
+        { "variable": "large", "value": "1200px", "compiledValue": "1200px" }
+      ],
+      "compiledValue": "(small:767px,medium:992px,large:1200px)"
+    }
+}
+```
+
+
 ## Want to use it in your Node App?
 Just import it!
 
@@ -123,7 +153,7 @@ var exporter = require('sass-export').exporter;
 var exporterBuffer = require('sass-export').buffer;
 ```
 
-New fancy way:
+import syntax:
 
 ``` javascript
  import { exporter } from 'sass-export';
@@ -140,7 +170,7 @@ var exporter = require('sass-export').exporter;
 //basic options
 var options = {
   inputFiles: ['_variables.scss', '_fonts.scss'],
-  includePaths: ['libs/'] //don't forget this is the folder path not the files
+  includePaths: ['libs/'] // don't forget this is the folder path not the files
 };
 
 // you can get an object {globals:[], colors: []}
@@ -179,7 +209,6 @@ Usage: sass-export [inputFiles] [options]
   * Gulp plugin: [gulp-sass-export]
 
 ### More to come soon:
-  * Import/require module documentation
   * Include/Exclude annotations.
   * Demo Page
 
@@ -194,3 +223,6 @@ ISC
 [node.js]: <http://nodejs.org>
 [node-sass]: <https://github.com/sass/node-sass>
 [gulp-sass-export]: <https://github.com/plentycode/gulp-sass-export>
+[exported-array.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/array.json>
+[exported-annotations]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/annotations.json>
+[exported-maps]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/maps-object.json>
