@@ -30,7 +30,7 @@ describe('Converter class', () => {
     let results = null;
 
     // tslint:disable-next-line:only-arrow-functions
-    before(function() {
+    before(function () {
       converter = new Converter(opts);
       results = converter.getArray();
 
@@ -68,7 +68,7 @@ describe('Converter class', () => {
     let results = null;
 
     // tslint:disable-next-line:only-arrow-functions
-    before(function() {
+    before(function () {
       opts.inputFiles.push(path.resolve('./test/scss/_colors.scss'));
       opts.inputFiles.push(path.resolve('./test/scss/_breakpoints.scss'));
 
@@ -138,7 +138,7 @@ describe('Converter class', () => {
   });
 
   describe('map support', () => {
-    it('it should work even if input files is not an array', () => {
+    it('should work even if input files is not an array', () => {
       let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
       let converter = new Converter(opts);
       let structured = converter.getStructured();
@@ -146,7 +146,7 @@ describe('Converter class', () => {
       expect(structured.globals[0]).to.have.property('compiledValue');
     });
 
-    it('it should compile values inside a map', () => {
+    it('should compile values inside a map', () => {
       let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
       let converter = new Converter(opts);
       let structured = converter.getStructured();
@@ -156,7 +156,7 @@ describe('Converter class', () => {
       expect(structured.globals[0].mapValue[0]).to.have.property('compiledValue');
     });
 
-    it('it should compile values inside a map as array also', () => {
+    it('should compile values inside a map as array also', () => {
       let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
       let converter = new Converter(opts);
       let result = converter.getArray();
@@ -167,5 +167,65 @@ describe('Converter class', () => {
     });
   });
 
+  describe('mixins support', () => {
+    it('should return a group for mixins', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_mixins.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured).to.have.property('mixins');
+    });
+
+    it('should return a name and a parameter list', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_mixins.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured.mixins[0].name).to.be.equal('box');
+      expect(structured.mixins[0].parameters).that.is.an('array');
+      expect(structured.mixins[0].parameters[0]).to.be.equal('$p1');
+      expect(structured.mixins[0].parameters[1]).to.be.equal('$p2');
+    });
+
+    it('should work for functions', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_mixins.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+      expect(structured.mixins[1].parameters[0]).to.be.equal('$val');
+    });
+
+    it('should work for mixins with default values', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_mixins.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+      expect(structured.mixins[2].parameters[0]).to.be.equal('$val: 10px');
+      expect(structured.mixins[2].parameters[1]).to.be.equal('$p2: \'#COFF33\'');
+    });
+
+    it('should have an empty array if not parameter', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_mixins.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured.mixins[3].parameters).to.be.empty;
+    });
+
+    it('should work with others groups', () => {
+      let opts = { inputFiles:
+          [
+            path.resolve('./test/scss/_mixins.scss'),
+            path.resolve('./test/scss/_annotations.scss'),
+          ],
+          includePaths: [] };
+
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured).to.have.property('mixins');
+      expect(structured).to.have.property('globals');
+      expect(structured).to.have.property('fonts');
+    });
+
+  });
 
 });

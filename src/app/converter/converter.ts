@@ -1,7 +1,7 @@
 import * as fs from 'fs';
 import * as sass from 'node-sass';
 import * as glob from 'glob';
-import { Parser } from '../parser';
+import { Parser, Mixins } from '../parser';
 import { Utils } from '../utils';
 
 const LINE_BREAK = '\n';
@@ -45,29 +45,31 @@ export class Converter {
 
 
   public compileStructure(structuredDeclaration: IDeclaration): object {
-    for (let group in structuredDeclaration) {
-      if (structuredDeclaration.hasOwnProperty(group)) {
-        let content = this.getContent();
-        let compiledGroup = structuredDeclaration[group].map((declaration) => {
-          declaration.compiledValue = this.renderPropertyValue(content, declaration);
-          declaration.variable = `$${declaration.variable}`;
+    let groups = Object.keys(structuredDeclaration);
 
-          if (declaration.mapValue) {
-            declaration.mapValue.map((mapDeclaration) => {
-              mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration);
-              return mapDeclaration;
-            });
-          }
+    groups.forEach((group) => {
+      let content = this.getContent();
 
-          return declaration;
-        });
-      }
-    }
-    return structuredDeclaration;
+      let compiledGroup = structuredDeclaration[group].map((declaration) => {
+        declaration.compiledValue = this.renderPropertyValue(content, declaration);
+        declaration.variable = `$${declaration.variable}`;
+
+        if (declaration.mapValue) {
+          declaration.mapValue.map((mapDeclaration) => {
+            mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration);
+            return mapDeclaration;
+          });
+        }
+
+        return declaration;
+      });
+    });
+
+    return this.checkForMixins(structuredDeclaration);
   }
 
 
-  protected getContent(): string {
+  public getContent(): string {
     let inputFiles = [];
     let inputs = [];
 
@@ -85,6 +87,18 @@ export class Converter {
     let contents = inputs.map((filePath) => fs.readFileSync(String(filePath)));
 
     return contents.join(LINE_BREAK);
+  }
+
+
+  private checkForMixins(structuredDeclaration: object) {
+    let mixinsGroup = 'mixins';
+    let parsedMixins = new Mixins(this.getContent()).parse();
+
+    if (parsedMixins && parsedMixins.length) {
+      structuredDeclaration[mixinsGroup] =  parsedMixins;
+    }
+
+    return structuredDeclaration;
   }
 
 
