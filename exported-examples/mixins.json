@@ -1,0 +1,56 @@
+{
+  "globals": [
+    {
+      "variable": "$bp-mobile",
+      "value": "320px",
+      "compiledValue": "320px"
+    },
+    {
+      "variable": "$bp-tablet",
+      "value": "600px",
+      "compiledValue": "600px"
+    },
+    {
+      "variable": "$bp-desktop",
+      "value": "1000px",
+      "compiledValue": "1000px"
+    },
+    {
+      "variable": "$bp-large-desktop",
+      "value": "1440px",
+      "compiledValue": "1440px"
+    }
+  ],
+  "mixins": [
+    {
+      "name": "box",
+      "parameters": [
+        "$p1",
+        "$p2"
+      ]
+    },
+    {
+      "name": "my-fucntion",
+      "parameters": [
+        "$val"
+      ]
+    },
+    {
+      "name": "z",
+      "parameters": [
+        "$val: 10px",
+        "$p2: '#COFF33'"
+      ]
+    },
+    {
+      "name": "no-params",
+      "parameters": []
+    },
+    {
+      "name": "respond-to",
+      "parameters": [
+        "$breakpoint"
+      ]
+    }
+  ]
+}

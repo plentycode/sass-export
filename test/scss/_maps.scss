@@ -15,3 +15,9 @@ $bps: (
   'desktop': $bp-desktop,
   'large-desktop': $bp-large-desktop
 );
+
+// @sass-export-section="icons"
+$icons: (
+  'glass': "value",
+   music: "value",
+);
