@@ -1,6 +1,6 @@
 {
   "name": "sass-export",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "Exports Sass files to Json format, able to manage sections with annotations in comments.",
   "main": "./dist/index.js",
   "files": [
@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc --p tsconfig.json",
     "dev": "npm run build & npm run test",
-    "prepublish": "npm run build",
+    "prepare": "npm run build",
     "prestart": "npm run build",
     "watch": "npm run build -- --watch",
     "test": "mocha -r ts-node/register src/**/*.test.ts"
