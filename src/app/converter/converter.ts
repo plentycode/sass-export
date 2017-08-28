@@ -116,7 +116,7 @@ export class Converter {
 
     } catch (err) {
       console.error(err);
-      return ''; // if the property can't be render, then it should return an empty string
+      return ''; // if the property can't be rendered, then it should return an empty string
     }
   }
 }

@@ -16,7 +16,7 @@ export class Mixins {
 
     let declarations = [];
 
-    matches.map((match) => {
+    matches.forEach((match) => {
       let mixins = this.parseSingle(match);
       let functions = this.parseSingle(match, true);
 

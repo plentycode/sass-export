@@ -165,6 +165,17 @@ describe('Converter class', () => {
       expect(result[0]).to.have.property('mapValue');
       expect(result[0].mapValue[0]).to.have.property('compiledValue');
     });
+
+    it('should work with variables in quotes', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured.icons[0]).to.have.property('mapValue');
+      expect(structured.icons[0].mapValue[0].variable).to.be.equal('glass');
+      expect(structured.icons[0].mapValue[0].value).to.be.equal('value');
+      expect(structured.icons[0].mapValue[0].compiledValue).to.be.equal('value');
+    });
   });
 
   describe('mixins support', () => {
