@@ -1,3 +1,37 @@
-@mixin nice-border($options) {
+// Breakpoints
+$bp-mobile: 320px;
+$bp-tablet: 600px;
+$bp-desktop: 1000px;
+$bp-large-desktop: 1440px;
+
+// 0
+@mixin box($p1, $p2) {
   @content;
 }
+
+// 1
+@function my-function($val) {
+
+}
+
+// 2
+@mixin z($val: 10px, $p2: '#COFF33') {
+  @content;
+}
+
+// 4
+@mixin no-params() {
+
+}
+
+// 5
+@mixin respond-to($breakpoint) {
+}
+
+
+/**
+ * @sass-export-section="mixins"
+ * will not be added, mixins is reserved
+ */
+ $color1: '#COFF33';
+ $color2: '#000000';

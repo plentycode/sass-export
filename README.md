@@ -141,6 +141,46 @@ _output:_ [exported-maps.json]
     }
 }
 ```
+### Mixin/Function support
+For mixins and functions we've added a reserved 'mixins' group for it.
+
+_input:_ _mixins.scss
+``` scss
+@mixin box($p1, $p2) {
+  @content;
+}
+@function my-function($val) {
+}
+@mixin z($val: 10px, $p2: '#COFF33') {
+  @content;
+}
+@mixin no-params() {
+}
+````
+_output:_ [exported-mixins.json]
+
+```javascript
+{
+  "mixins": [
+    {
+      "name": "box",
+      "parameters": [ "$p1", "$p2" ]
+    },
+    {
+      "name": "my-fucntion",
+      "parameters": [ "$val" ]
+    },
+    {
+      "name": "z",
+      "parameters": [ "$val: 10px", "$p2: '#COFF33'" ]
+    },
+    {
+      "name": "no-params",
+      "parameters": []
+    }
+  ]
+}
+```
 
 
 ## Want to use it in your Node App?
@@ -226,3 +266,4 @@ ISC
 [exported-sass-array.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/array.json>
 [exported-grouped.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/annotations.json>
 [exported-maps.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/maps-object.json>
+[exported-mixins.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/mixins.json>
