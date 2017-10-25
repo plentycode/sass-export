@@ -42,13 +42,13 @@ describe('Converter class', () => {
     });
 
     it('should have the correct object structure', () => {
-      expect(results[0]).to.have.property('variable');
+      expect(results[0]).to.have.property('name');
       expect(results[0]).to.have.property('value');
       expect(results[0]).to.have.property('compiledValue');
     });
 
-    it('should have the variable the same as the sass file', () => {
-      expect(results[0].variable).to.equal('$white');
+    it('should have the name the same as the sass file', () => {
+      expect(results[0].name).to.equal('$white');
       expect(results[0].value).to.equal('#fff');
       expect(results[0].compiledValue).to.equal('#fff');
     });
@@ -172,7 +172,7 @@ describe('Converter class', () => {
       let structured = converter.getStructured();
 
       expect(structured.icons[0]).to.have.property('mapValue');
-      expect(structured.icons[0].mapValue[0].variable).to.be.equal('glass');
+      expect(structured.icons[0].mapValue[0].name).to.be.equal('glass');
       expect(structured.icons[0].mapValue[0].value).to.be.equal('value');
       expect(structured.icons[0].mapValue[0].compiledValue).to.be.equal('value');
     });

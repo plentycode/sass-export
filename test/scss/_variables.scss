@@ -30,18 +30,18 @@ $brand-orchid-dark: #6b3b63;
 $brand-slate: #4e6c78;
 
 $first: 52px;
-$second-variable: red;
-$global-variable: #123; // inline comment here
-$references: $second-variable;
+$second-name: red;
+$global-name: #123; // inline comment here
+$references: $second-name;
 $scss-function: lighten(#123, 10%);
 // some comments in here
-$scss-function-with-variable: darken($global-variable, 5%);
+$scss-function-with-name: darken($global-name, 5%);
 $image: url(sample.svg);
 $image-with-quotes: url('sample.svg');
 $calculation: $first - 12px;
 //some more comments with a return after
 
-$multiple-variables: $first solid $second-variable;
+$multiple-variables: $first solid $second-name;
 $multiple-calculations: $first - floor(12.5px);
 
 $gray-medium: #757575;

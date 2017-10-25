@@ -31,7 +31,7 @@ export class Parser {
         if (parsed) {
           let map = this.extractMapDeclarations(parsed.value);
 
-          // in case the variable is a sass map
+          // in case the name is a sass map
           if (map.length) {
             parsed.mapValue = map.map((declaration) => this.parseSingleDecaration(`$${declaration};`));
           }
@@ -72,7 +72,7 @@ export class Parser {
         if (parsed) {
           let map = this.extractMapDeclarations(parsed.value);
 
-          // in case the variable is a sass map
+          // in case the name is a sass map
           if (map.length) {
             parsed.mapValue = map.map((declaration) => this.parseSingleDecaration(`$${declaration};`));
           }
@@ -127,10 +127,10 @@ export class Parser {
       return;
     }
 
-    let variable = matches[1].trim().replace('_', '-');
+    let name = matches[1].trim().replace('_', '-');
     let value = matches[2].trim().replace(/\s*\n+\s*|\"/g, '');
 
-    return { variable, value } as IDeclaration;
+    return { name, value } as IDeclaration;
   }
 
 
