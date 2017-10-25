@@ -22,7 +22,7 @@ git checkout -b branch-name
 
 5. Commit, push and create a pull request
 
-#### Development
+## Development
 We use [Typescript](https://www.typescriptlang.org/) that compiles to plain
 javascript.
 
