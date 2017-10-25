@@ -1,20 +1,48 @@
 # Contributing
 
-When contributing to this repository, please first discuss the change you wish to make via issue,
-email, or any other method with the owners of this repository before making a change. 
-
-Please note we have a code of conduct, please follow it in all your interactions with the project.
+Please feel free to submit pull requests or open issues to improve this tool.
+Also keep checking [issues][issues] section and grab some items to help!
 
 ## Pull Request Process
 
-1. Ensure any install or build dependencies are removed before the end of the layer when doing a 
-   build.
-2. Update the README.md with details of changes to the interface, this includes new environment 
-   variables, exposed ports, useful file locations and container parameters.
-3. Increase the version numbers in any examples files and the README.md to the new version that this
-   Pull Request would represent. The versioning scheme we use is [SemVer](http://semver.org/).
-4. You may merge the Pull Request in once you have the sign-off of two other developers, or if you 
-   do not have permission to do that, you may request the second reviewer to merge it for you.
+1. Fort this project.
+2. Clone your fork down to your local machine
+```
+git clone https://github.com/your-username/sass-export.git
+```
+3. Create a feature branch
+```markdown
+git checkout -b branch-name
+```
+4. Make your changes.
+   - Ensurure all test are passing.
+   - Manual testing.
+   - Update documentation (README.md).
+   - Update Examples
+
+5. Commit, push and create a pull request
+
+#### Development
+We use [Typescript](https://www.typescriptlang.org/) that compiles to plain
+javascript.
+
+All you need to start working is:
+```
+npm install
+```
+Please use build script to compile typescrip to Js:
+```
+npm run build
+```
+or use the watch script to build your code as you write it: 
+```
+npm run watch
+```
+Please make sure to update the unit test and also make sure all of them are passing:
+```
+npm run test
+```
+
 
 ## Code of Conduct
 
@@ -90,3 +118,4 @@ available at [http://contributor-covenant.org/version/1/4][version]
 
 [homepage]: http://contributor-covenant.org
 [version]: http://contributor-covenant.org/version/1/4/
+[issues]: https://github.com/plentycode/sass-export/issues
