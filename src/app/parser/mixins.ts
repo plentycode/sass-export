@@ -1,9 +1,9 @@
 import { Parser } from './parser';
 
-const MIXIN_VALUES_REGEX = /@mixin ?((?!\d)[\w_-][\w\d_-]*)\s*\(\s*([^\)"]+)?./gi;
-const FUNC_VALUES_REGEX = /@function ?((?!\d)[\w_-][\w\d_-]*)\s*\(\s*([^\)"]+)?./gi;
+const MIXIN_VALUES_REGEX = /@mixin ?((?!\d)[\w_-][\w\d_-]*)(\([^\)"]+.)?/gi;
+const FUNC_VALUES_REGEX = /@function ?((?!\d)[\w_-][\w\d_-]*)(\([^\)"]+.)?/gi;
 
-const MIXIN_DECLARATION_REGEX = '@mixin.[^\)]+.|@function.[^\)]+.';
+const MIXIN_DECLARATION_REGEX = '@mixin.[^\{]+|@function.[^\{]+';
 
 export class Mixins {
 
@@ -13,7 +13,6 @@ export class Mixins {
 
   public parse(): any[] {
     let matches = this.extractDeclarations(this.rawContent);
-
     let declarations = [];
 
     matches.forEach((match) => {
@@ -48,7 +47,7 @@ export class Mixins {
     let parameters = [];
 
     if (matches.length > 2 && matches[2]) {
-      let params = matches[2].split(',').map((param) => param.trim());
+      let params = matches[2].split(',').map((param) => param.trim().replace(/[\(\)]/g, ''));
       parameters.push(...params);
     }
 

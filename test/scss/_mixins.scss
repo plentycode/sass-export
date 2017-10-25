@@ -28,6 +28,11 @@ $bp-large-desktop: 1440px;
 @mixin respond-to($breakpoint) {
 }
 
+//6
+@mixin no-parenthesis-mixin {
+  background: red;
+}
+
 
 /**
  * @sass-export-section="mixins"

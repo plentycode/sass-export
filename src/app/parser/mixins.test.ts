@@ -74,4 +74,18 @@ describe('Parser for mixins', () => {
     expect(mixins[1].name).to.be.equal('z');
   });
 
+  it('should work for mixins and functions with no parenthesis', () => {
+    let content = `
+        @function no-parenthesis-func { };
+        @mixin no-parenthesis-mixin { };`;
+
+    let parser = new Mixins(content);
+    let mixins = parser.parse();
+
+    expect(mixins.length).to.equal(2);
+    expect(mixins[0].name).to.be.equal('no-parenthesis-func');
+    expect(mixins[1].name).to.be.equal('no-parenthesis-mixin');
+
+  });
+
 });
