@@ -37,13 +37,13 @@ _output_: [exported-sass-array.json]
 
 ``` javascript
 [
-  { "variable": "$gray-medium", "value": "#757575", "compiledValue": "#757575" },
-  { "variable": "$base-value", "value": "25px", "compiledValue": "25px" },
-  { "variable": "$gray-dark", "value": "darken($gray-medium, 5%)", "compiledValue" :"#686868" },
-  { "variable": "$logo", "value": "url(logo.svg)", "compiledValue": "url(logo.svg)" },
-  { "variable": "$logo-quotes", "value": "url('logo.svg')", "compiledValue": "url(\"logo.svg\")" },
-  { "variable": "$calculation", "value": "$base-value - 12px", "compiledValue": "13px" },
-  { "variable": "$multiple-calculations", "value": "$base-value - floor(12.5px)", "compiledValue": "13px" }
+  { "name": "$gray-medium", "value": "#757575", "compiledValue": "#757575" },
+  { "name": "$base-value", "value": "25px", "compiledValue": "25px" },
+  { "name": "$gray-dark", "value": "darken($gray-medium, 5%)", "compiledValue" :"#686868" },
+  { "name": "$logo", "value": "url(logo.svg)", "compiledValue": "url(logo.svg)" },
+  { "name": "$logo-quotes", "value": "url('logo.svg')", "compiledValue": "url(\"logo.svg\")" },
+  { "name": "$calculation", "value": "$base-value - 12px", "compiledValue": "13px" },
+  { "name": "$multiple-calculations", "value": "$base-value - floor(12.5px)", "compiledValue": "13px" }
 ]
 ```
 
@@ -84,18 +84,18 @@ _output_ [exported-grouped.json]
 ``` javascript
 {
     "globals": [
-        { "variable": "$black", "value": "#000", "compiledValue": "#000" },
-        { "variable": "$slate", "value": "#8ca5af", "compiledValue": "#8ca5af" },
-        { "variable": "$global-group", "value": "#ff0000", "compiledValue": "#ff0000" }
+        { "name": "$black", "value": "#000", "compiledValue": "#000" },
+        { "name": "$slate", "value": "#8ca5af", "compiledValue": "#8ca5af" },
+        { "name": "$global-group", "value": "#ff0000", "compiledValue": "#ff0000" }
     ],
     "brand-colors": [
-        { "variable": "$brand-gray-light", "value": "#eceff1", "compiledValue":"#eceff1" },
-        { "variable": "$brand-gray-medium", "value": "#d6d6d6" ,"compiledValue":"#d6d6d6" },
-        { "variable": "$brand-gray", "value": "#b0bec5", "compiledValue": "#b0bec5" }
+        { "name": "$brand-gray-light", "value": "#eceff1", "compiledValue":"#eceff1" },
+        { "name": "$brand-gray-medium", "value": "#d6d6d6" ,"compiledValue":"#d6d6d6" },
+        { "name": "$brand-gray", "value": "#b0bec5", "compiledValue": "#b0bec5" }
     ],
     "fonts": [
-        { "variable": "$font-size", "value": "16px", "compiledValue": "16px" },
-        { "variable": "$font-color", "value": "$brand-gray-medium", "compiledValue":"#d6d6d6" }
+        { "name": "$font-size", "value": "16px", "compiledValue": "16px" },
+        { "name": "$font-color", "value": "$brand-gray-medium", "compiledValue":"#d6d6d6" }
     ]
 }
 ```
@@ -133,12 +133,12 @@ _output:_ [exported-maps.json]
 {
   "globals": [
     {
-      "variable": "$breakpoints",
+      "name": "$breakpoints",
       "value": "(small: 767px,\n  medium: 992px,\n  large: 1200px\n)",
       "mapValue": [
-        { "variable": "small", "value": "767px", "compiledValue": "767px" },
-        { "variable": "medium","value": "992px", "compiledValue": "992px" },
-        { "variable": "large", "value": "1200px", "compiledValue": "1200px" }
+        { "name": "small", "value": "767px", "compiledValue": "767px" },
+        { "name": "medium","value": "992px", "compiledValue": "992px" },
+        { "name": "large", "value": "1200px", "compiledValue": "1200px" }
       ],
       "compiledValue": "(small:767px,medium:992px,large:1200px)"
     }
