@@ -251,36 +251,12 @@ Usage: sass-export [inputFiles] [options]
 ### New utilities
   * Gulp plugin: [gulp-sass-export]
 
-### More to come soon:
-  * Include/Exclude annotations.
-  * Demo Page
-
 
 ### Contributing
-Please feel free to submit pull requests or open issues to improve this tool. Also keep checking [issues][issues] section and grab some items to help!
-1. Fork this project.
-3. Create a feature branch.
-2. Submit a pull request.
+Please feel free to submit pull requests or open issues to improve this tool.
+Also keep checking [issues][issues] section and grab some items to help!
 
-#### Development
-We use [Typescript](https://www.typescriptlang.org/) that compiles to plain javascript.
-
-All you need to start working is:
-```
-npm install
-```
-Please use build script to compile typescrip to Js:
-```
-npm run build
-```
-or use the watch script to build your code as you write it: 
-```
-npm run watch
-```
-Please make sure to update the unit test and also make sure all of them are passing:
-```
-npm run test
-```
+Check our [Contributing][contributing] page for more information.
 
 License
 ----
@@ -297,3 +273,4 @@ MIT
 [exported-maps.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/maps-object.json>
 [exported-mixins.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/mixins.json>
 [issues]: https://github.com/plentycode/sass-export/issues
+[contributing]: https://github.com/plentycode/sass-export/blob/master/CONTRIBUTING.md
