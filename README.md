@@ -16,7 +16,7 @@ $ npm install -g sass-export
 Ready to export:
 
 ```
-$ sass-export scss/config/*.scss -o -a exported-sass-array.json
+$ sass-export scss/config/*.scss -o exported-sass-array.json -a
 ```
 
 ### Here's a sample output
