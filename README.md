@@ -16,7 +16,7 @@ $ npm install -g sass-export
 Ready to export:
 
 ```
-$ sass-export scss/config/*.scss -o exported-sass-array.json
+$ sass-export scss/config/*.scss -o -a exported-sass-array.json
 ```
 
 ### Here's a sample output
@@ -74,9 +74,9 @@ $font-color: $brand-gray-medium;
 $global-group: #FF0000;
 ```
 
-Then we run sass-export, don't forget to include **--structured** flag:
+Then we run sass-export:
 ```
-$ sass-export scss/_annotations.scss -o exported-grouped.json -s
+$ sass-export scss/_annotations.scss -o exported-grouped.json
 ```
 
 
@@ -103,7 +103,7 @@ _output_ [exported-grouped.json]
 ### Include Paths for @import
 In order to support @import we need to include **--dependencies** parameter with a comma separated list of the folder path to include:
 ```
-$ sass-export scss/_fonts.scss -o=exported-dependencies.json -s -d "src/sass/config/, src/sass/libs/"
+$ sass-export scss/_fonts.scss -o=exported-dependencies.json  -d "src/sass/config/, src/sass/libs/"
 ```
 
 in order to use:
@@ -243,7 +243,7 @@ Usage: sass-export [inputFiles] [options]
 | Options | Type | Description |
 | ------                | ----        | ------ |
 |  -o, --output         |  String     |    File path where to save the JSON exported. |
-|  -s, --structured     |  Boolean    |   If it is present, it will output an object structured file instead of a plain array. |
+|  -a, --array          |  Boolean    |   If it is present, it will output an array file instead of a object structured. |
 |  -d, --dependencies   |  String[]   |   List of dependencies separated by comma, where Sass will try to find the @imports that your inputFiles need to work. Example: "libs/, config/, globals/". |
 |  -h, --help           |   Boolean   |  Shows up this help screen. |
 

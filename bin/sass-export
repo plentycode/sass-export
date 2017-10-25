@@ -8,7 +8,7 @@ var minimist = require('minimist');
 var options = minimist(process.argv.slice(2), {
   alias: {
     o: 'output',
-    s: 'structured',
+    a: 'array',
     d: 'dependencies',
     h: 'help',
     v: 'version'
@@ -44,10 +44,10 @@ var exporter = sassExport({
 
 var outputJson = [];
 
-if (options.structured) {
-  outputJson = exporter.getStructured();
-} else {
+if (options.array) {
   outputJson = exporter.getArray();
+} else {
+  outputJson = exporter.getStructured();
 }
 
 outputJson = JSON.stringify(outputJson, null, 2);
