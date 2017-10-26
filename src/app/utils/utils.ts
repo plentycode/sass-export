@@ -9,14 +9,14 @@ const UNWRAPPER_PATTERN = `${WRAPPER_CSS_ID}\\.(.+)\\s*\\{\\s*content:\\s*["'](.
 export class Utils {
 
   public static getDeclarationByName(declarations: IDeclaration[] = [], name: string): IDeclaration {
-    let filtered = declarations.filter((declaration) => declaration.variable === name);
+    let filtered = declarations.filter((declaration) => declaration.name === name);
 
     return filtered[0];
   }
 
 
   public static wrapCss(cssDeclaration: IDeclaration): string {
-    return `${WRAPPER_CSS_ID}.${cssDeclaration.variable}{content:"#{${cssDeclaration.value}}";}`;
+    return `${WRAPPER_CSS_ID}.${cssDeclaration.name}{content:"#{${cssDeclaration.value}}";}`;
   }
 
 

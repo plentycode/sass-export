@@ -5,9 +5,9 @@ describe('Utils class', () => {
 
   let declarations = [
     // tslint:disable:object-literal-key-quotes
-    { "variable": "$brand-blue-gray", "value": "#647b86", "compiledValue": "#647b86" },
-    { "variable": "$brand-blue-gray-dark", "value": "#546E7A", "compiledValue": "#546E7A" },
-    { "variable": "$brand-solitude", "value": "#ebeff2", "compiledValue": "#ebeff2" }
+    { "name": "$brand-blue-gray", "value": "#647b86", "compiledValue": "#647b86" },
+    { "name": "$brand-blue-gray-dark", "value": "#546E7A", "compiledValue": "#546E7A" },
+    { "name": "$brand-solitude", "value": "#ebeff2", "compiledValue": "#ebeff2" }
   ];
 
   it('should have a public helper getDeclaration', () => {
@@ -32,7 +32,7 @@ describe('Utils class', () => {
   });
 
   it('should wrap a variable', () => {
-    let declaration = { variable: 'var', value: '$the-value', compiledValue: '' };
+    let declaration = { name: 'var', value: '$the-value', compiledValue: '' };
     let expectedResult = '#sass-export-id.var{content:"#{$the-value}";}';
     let wrapped = Utils.wrapCss(declaration);
 

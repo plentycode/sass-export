@@ -22,7 +22,7 @@ export class Converter {
 
     return parsedDeclarations.map((declaration) => {
       declaration.compiledValue = this.renderPropertyValue(content, declaration);
-      declaration.variable = `$${declaration.variable}`;
+      declaration.name = `$${declaration.name}`;
 
       if (declaration.mapValue) {
         declaration.mapValue.map((mapDeclaration) => {
@@ -52,7 +52,7 @@ export class Converter {
 
       let compiledGroup = structuredDeclaration[group].map((declaration) => {
         declaration.compiledValue = this.renderPropertyValue(content, declaration);
-        declaration.variable = `$${declaration.variable}`;
+        declaration.name = `$${declaration.name}`;
 
         if (declaration.mapValue) {
           declaration.mapValue.map((mapDeclaration) => {
