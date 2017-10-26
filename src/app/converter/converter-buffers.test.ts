@@ -14,7 +14,7 @@ describe('buffers support', () => {
 
     converter.getData().then((result) => {
       expect(result).that.is.an('object');
-      expect(result.globals[0]).to.have.property('compiledValue');
+      expect(result.variables[0]).to.have.property('compiledValue');
     }).catch((err: Error) => {
       console.log('error', err.message);
     });
@@ -36,8 +36,8 @@ describe('buffers support', () => {
 
     converter.getData().then((result) => {
       expect(result).that.is.an('object');
-      expect(result.globals[0]).to.have.property('compiledValue');
-      expect(result.globals).length.greaterThan(0);
+      expect(result.variables[0]).to.have.property('compiledValue');
+      expect(result.variables).length.greaterThan(0);
     });
   });
 
