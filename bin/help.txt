@@ -7,7 +7,7 @@ Options:
     --array     -a    If present, it will output an array file instead of a object structured.
 
     --dependencies   -d   List of dependencies separated by comma, where Sass will try to find the @imports
-                          that your inputFiles need to work. Example: "libs/, config/, globals/"
+                          that your inputFiles need to work. Example: "libs/, config/, variables/“
 
     --version       -v    Current working version.
 

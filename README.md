@@ -83,7 +83,7 @@ $ sass-export scss/_annotations.scss -o exported-grouped.json
 _output_ [exported-grouped.json]
 ``` javascript
 {
-    "globals": [
+    "variables": [
         { "name": "$black", "value": "#000", "compiledValue": "#000" },
         { "name": "$slate", "value": "#8ca5af", "compiledValue": "#8ca5af" },
         { "name": "$global-group", "value": "#ff0000", "compiledValue": "#ff0000" }
@@ -110,7 +110,7 @@ in order to use:
 
 ``` scss
 @import "breakpoints";
-@import "globals";
+@import "variables";
 
 $imported-value: $bp-desktop;
 $font-size: $global-font-size;
@@ -131,7 +131,7 @@ _output:_ [exported-maps.json]
 
 ```javascript
 {
-  "globals": [
+  "variables": [
     {
       "name": "$breakpoints",
       "value": "(small: 767px,\n  medium: 992px,\n  large: 1200px\n)",
@@ -216,10 +216,10 @@ var options = {
   includePaths: ['libs/'] // don't forget this is the folder path not the files
 };
 
-// you can get an object {globals:[], colors: []}
+// you can get an object {variables:[], colors: []}
 var asObject = exporter(options).getStructured();
 
-console.log(asObject.globals);
+console.log(asObject.variables);
 console.log(asObject.colors);
 
 // or get an array [{}, {}]
@@ -244,7 +244,7 @@ Usage: sass-export [inputFiles] [options]
 | ------                | ----        | ------ |
 |  -o, --output         |  String     |    File path where to save the JSON exported. |
 |  -a, --array          |  Boolean    |   If it is present, it will output an array file instead of a object structured. |
-|  -d, --dependencies   |  String[]   |   List of dependencies separated by comma, where Sass will try to find the @imports that your inputFiles need to work. Example: "libs/, config/, globals/". |
+|  -d, --dependencies   |  String[]   |   List of dependencies separated by comma, where Sass will try to find the @imports that your inputFiles need to work. Example: "libs/, config/, variables/". |
 |  -h, --help           |   Boolean   |  Shows up this help screen. |
 
 
