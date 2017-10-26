@@ -6,7 +6,7 @@ interface IOptions {
 }
 
 interface IDeclaration {
-  variable: string,
+  name: string,
   value: string,
   mapValue?: Array<any>,
   compiledValue: string

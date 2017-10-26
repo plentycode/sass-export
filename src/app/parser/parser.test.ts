@@ -26,7 +26,7 @@ describe('Parser class', () => {
 
     expect(validParser.parse()).that.is.an('array');
     expect(validParser.parse()).to.have.lengthOf(1);
-    expect(validParser.parse()[0].variable).to.be.equal('slate-dark');
+    expect(validParser.parse()[0].name).to.be.equal('slate-dark');
     expect(validParser.parse()[0].value).to.be.equal('#4f6f7b');
   });
 
@@ -74,7 +74,7 @@ describe('Parser class', () => {
       expect(structured).to.have.property('theme-colors');
       expect(structured.variables.length).be.equal(2);
       expect(structured['theme-colors'].length).be.equal(3);
-      expect(structured['theme-colors'][1].variable).to.be.equal('brand-gray-medium');
+      expect(structured['theme-colors'][1].name).to.be.equal('brand-gray-medium');
     });
 
     it('should group in variables if end-section is present', () => {
@@ -91,7 +91,7 @@ describe('Parser class', () => {
       expect(structured).to.have.property('light');
       expect(structured.variables.length).be.equal(4);
       expect(structured.light.length).be.equal(1);
-      expect(structured.light[0].variable).be.equal('brand-gray-light');
+      expect(structured.light[0].name).be.equal('brand-gray-light');
     });
 
     it('should ignore the section if the name is invalid', () => {
@@ -136,7 +136,7 @@ describe('Parser class', () => {
       let structured = parser.parseStructured();
 
       expect(structured.first.length).be.equal(3);
-      expect(structured.first[2].variable).be.equal('brand-gray-3');
+      expect(structured.first[2].name).be.equal('brand-gray-3');
     });
   });
 
@@ -164,7 +164,7 @@ describe('Parser class', () => {
       let parser = new Parser(content);
       let structured = parser.parseStructured();
 
-      expect(structured.variables[0].mapValue[0].variable).be.equal('small');
+      expect(structured.variables[0].mapValue[0].name).be.equal('small');
       expect(structured.variables[0].mapValue[0].value).be.equal('767px');
 
       expect(structured.variables[0].mapValue[1].value).be.equal('$bp-medium');
@@ -180,7 +180,7 @@ describe('Parser class', () => {
       let parser = new Parser(content);
       let parsedArray = parser.parse();
 
-      expect(parsedArray[0].mapValue[0].variable).be.equal('small');
+      expect(parsedArray[0].mapValue[0].name).be.equal('small');
       expect(parsedArray[0].mapValue[0].value).be.equal('767px');
 
       expect(parsedArray[0].mapValue[1].value).be.equal('$bp-medium');

@@ -127,10 +127,10 @@ export class Parser {
       return;
     }
 
-    let variable = matches[1].trim().replace('_', '-');
+    let name = matches[1].trim().replace('_', '-');
     let value = matches[2].trim().replace(/\s*\n+\s*|\"/g, '');
 
-    return { variable, value } as IDeclaration;
+    return { name, value } as IDeclaration;
   }
 
 
