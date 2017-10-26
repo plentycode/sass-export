@@ -6,7 +6,7 @@ import { Utils } from '../utils';
 describe('Converter class', () => {
   let options = { inputFiles: [''], format: 'JSON' };
 
-  it('should return an instance of Converer', () => {
+  it('should return an instance of Converter', () => {
     let converter = new Converter(options);
     expect(converter).to.be.instanceof(Converter);
   });
@@ -24,7 +24,7 @@ describe('Converter class', () => {
   });
 
 
-  describe('JSON exported extructure', () => {
+  describe('JSON exported structure', () => {
     let opts = { inputFiles: [path.resolve('./test/scss/_variables.scss')], format: 'JSON' };
     let converter = null;
     let results = null;
