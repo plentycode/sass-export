@@ -1,5 +1,5 @@
 {
-  "globals": [
+  "variables": [
     {
       "name": "$breakpoints",
       "value": "(small: 767px,\n  medium: 992px,\n  large: 1200px\n)",

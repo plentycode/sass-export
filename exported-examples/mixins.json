@@ -1,5 +1,5 @@
 {
-  "globals": [
+  "variables": [
     {
       "name": "$bp-mobile",
       "value": "320px",
