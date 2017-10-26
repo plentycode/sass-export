@@ -106,8 +106,8 @@ describe('Converter class', () => {
       let converter = new Converter(opts);
       let structured = converter.getStructured();
 
-      // globals
-      expect(structured.globals[0]).to.have.property('compiledValue');
+      // variables
+      expect(structured.variables[0]).to.have.property('compiledValue');
       // brand-colors
       expect(structured['brand-colors'][0]).to.have.property('compiledValue');
       // darkens
@@ -123,7 +123,7 @@ describe('Converter class', () => {
       let converter = new Converter(opts);
       let structured = converter.getStructured();
 
-      expect(structured.globals[0]).to.have.property('compiledValue');
+      expect(structured.variables[0]).to.have.property('compiledValue');
     });
   });
 
@@ -133,7 +133,7 @@ describe('Converter class', () => {
       let converter = new Converter(opts);
       let structured = converter.getStructured();
 
-      expect(structured.globals[0]).to.have.property('compiledValue');
+      expect(structured.variables[0]).to.have.property('compiledValue');
     });
   });
 
@@ -143,7 +143,7 @@ describe('Converter class', () => {
       let converter = new Converter(opts);
       let structured = converter.getStructured();
 
-      expect(structured.globals[0]).to.have.property('compiledValue');
+      expect(structured.variables[0]).to.have.property('compiledValue');
     });
 
     it('should compile values inside a map', () => {
@@ -151,9 +151,9 @@ describe('Converter class', () => {
       let converter = new Converter(opts);
       let structured = converter.getStructured();
 
-      expect(structured.globals[0]).to.have.property('compiledValue');
-      expect(structured.globals[0]).to.have.property('mapValue');
-      expect(structured.globals[0].mapValue[0]).to.have.property('compiledValue');
+      expect(structured.variables[0]).to.have.property('compiledValue');
+      expect(structured.variables[0]).to.have.property('mapValue');
+      expect(structured.variables[0].mapValue[0]).to.have.property('compiledValue');
     });
 
     it('should compile values inside a map as array also', () => {
@@ -233,7 +233,7 @@ describe('Converter class', () => {
       let structured = converter.getStructured();
 
       expect(structured).to.have.property('mixins');
-      expect(structured).to.have.property('globals');
+      expect(structured).to.have.property('variables');
       expect(structured).to.have.property('fonts');
     });
 

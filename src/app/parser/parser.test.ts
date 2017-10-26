@@ -50,15 +50,15 @@ describe('Parser class', () => {
       expect(structured).to.be.empty;
     });
 
-    it('should be globals property', () => {
+    it('should be variables property', () => {
       let content = `$black: #000;
                      $white: #fff;`;
       let parser = new Parser(content);
       let structured = parser.parseStructured();
 
       expect(structured).to.be.an('object');
-      expect(structured).to.have.property('globals');
-      expect(structured.globals.length).be.equal(2);
+      expect(structured).to.have.property('variables');
+      expect(structured.variables.length).be.equal(2);
     });
 
     it('should create a property if a section is present', () => {
@@ -72,12 +72,12 @@ describe('Parser class', () => {
       let structured = parser.parseStructured();
 
       expect(structured).to.have.property('theme-colors');
-      expect(structured.globals.length).be.equal(2);
+      expect(structured.variables.length).be.equal(2);
       expect(structured['theme-colors'].length).be.equal(3);
       expect(structured['theme-colors'][1].variable).to.be.equal('brand-gray-medium');
     });
 
-    it('should group in globals if end-section is present', () => {
+    it('should group in variables if end-section is present', () => {
       let content = `$black: #000;
                      $white: #fff;
                      //@sass-export-section="light"
@@ -89,7 +89,7 @@ describe('Parser class', () => {
       let structured = parser.parseStructured();
 
       expect(structured).to.have.property('light');
-      expect(structured.globals.length).be.equal(4);
+      expect(structured.variables.length).be.equal(4);
       expect(structured.light.length).be.equal(1);
       expect(structured.light[0].variable).be.equal('brand-gray-light');
     });
@@ -104,7 +104,7 @@ describe('Parser class', () => {
 
       let parser = new Parser(content);
       let structured = parser.parseStructured();
-      expect(structured.globals.length).be.equal(2);
+      expect(structured.variables.length).be.equal(2);
     });
 
     it('should allow JSON friendly names only for section name', () => {
@@ -151,7 +151,7 @@ describe('Parser class', () => {
       let parser = new Parser(content);
       let structured = parser.parseStructured();
 
-      expect(structured.globals[0].mapValue).that.is.an('array');
+      expect(structured.variables[0].mapValue).that.is.an('array');
     });
 
     it('should have a structured result', () => {
@@ -164,10 +164,10 @@ describe('Parser class', () => {
       let parser = new Parser(content);
       let structured = parser.parseStructured();
 
-      expect(structured.globals[0].mapValue[0].variable).be.equal('small');
-      expect(structured.globals[0].mapValue[0].value).be.equal('767px');
+      expect(structured.variables[0].mapValue[0].variable).be.equal('small');
+      expect(structured.variables[0].mapValue[0].value).be.equal('767px');
 
-      expect(structured.globals[0].mapValue[1].value).be.equal('$bp-medium');
+      expect(structured.variables[0].mapValue[1].value).be.equal('$bp-medium');
     });
 
     it('should have a structured result for array type', () => {

@@ -9,7 +9,7 @@ const SECTION_TAG = 'sass-export-section';
 const SECTION_PATTERN = `(@${SECTION_TAG}=)(".+")`;
 const END_SECTION_PATTERN = `(@end-${SECTION_TAG})`;
 
-const DEFAULT_SECTION = 'globals';
+const DEFAULT_SECTION = 'variables';
 
 
 export class Parser {
