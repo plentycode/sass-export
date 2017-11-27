@@ -6,6 +6,9 @@ This is perfect for generating your site documentation.
 [![npm version](https://badge.fury.io/js/sass-export.svg)](http://badge.fury.io/js/sass-export)
 [![Dependency Status](https://david-dm.org/plentycode/sass-export.svg?theme=shields.io)](https://david-dm.org/plentycode/sass-export)
 
+Try it online:
+[Playground (demo)](https://goo.gl/Q9CMzS)
+
 #### CLI
 Install it from NPM
 
