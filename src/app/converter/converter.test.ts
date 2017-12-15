@@ -60,6 +60,12 @@ describe('Converter class', () => {
       expect(foundDeclaration.compiledValue).to.equal('#1e3c59');
     });
 
+    it('should work for values with spaces', () => {
+      let foundDeclaration = Utils.getDeclarationByName(results, '$multiple-variables');
+
+      expect(foundDeclaration.compiledValue).to.equal('52px solid red');
+    });
+
   });
 
   describe('Multiple input files', () => {
