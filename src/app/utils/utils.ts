@@ -21,7 +21,7 @@ export class Utils {
 
 
   public static unWrapValue(wrappedContent: string): string {
-    wrappedContent = wrappedContent.replace(/\s/g, '');
+    wrappedContent = wrappedContent.replace(/\n/g, '');
 
     let matches = wrappedContent.match(UNWRAPPER_PATTERN);
 
