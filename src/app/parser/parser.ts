@@ -3,7 +3,9 @@ const VALUE_PATERN = '[^;]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
 const DECLARATION_PATTERN =
   `\\$'?(${VARIABLE_PATERN})'?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
 
-const MAP_DECLARATIOM_REGEX =  /'?((?!\d)[\w_-][\w\d_-]*)'?\s*:\s*([^,)]+)/gi;
+const MAP_DECLARATIOM_REGEX = /'?((?!\d)[\w_-][\w\d_-]*)'?\s*:\s*([^,)]+)/gi;
+const QUOTES_PATTERN = /^(['"]).*\1$/;
+const QUOTES_REPLACE = /^(['"])|(['"])$/g;
 
 const SECTION_TAG = 'sass-export-section';
 const SECTION_PATTERN = `(@${SECTION_TAG}=)(".+")`;
@@ -128,7 +130,11 @@ export class Parser {
     }
 
     let name = matches[1].trim().replace('_', '-');
-    let value = matches[2].trim().replace(/\s*\n+\s*|\"/g, '');
+    let value = matches[2].trim().replace(/\s*\n+\s*/g, '');
+
+    if (value.match(QUOTES_PATTERN)) {
+      value = value.replace(QUOTES_REPLACE, '');
+    }
 
     return { name, value } as IDeclaration;
   }

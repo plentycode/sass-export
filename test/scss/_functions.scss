@@ -1,0 +1,3 @@
+
+$other-var: true;
+$test-function-export: if($other-var, "bootstrap/", "../fonts/bootstrap/");

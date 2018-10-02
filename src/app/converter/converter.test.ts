@@ -143,6 +143,16 @@ describe('Converter class', () => {
     });
   });
 
+  describe('function result support', () => {
+    it('should return correct compiledValue when function is used', () => {
+      let opts = { inputFiles: path.resolve('./test/scss/_functions.scss'), includePaths: [] };
+      let converter = new Converter(opts);
+      let structured = converter.getStructured();
+
+      expect(structured.variables[1].compiledValue).to.be.equal('bootstrap/');
+    })
+  });
+
   describe('map support', () => {
     it('should work even if input files is not an array', () => {
       let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
