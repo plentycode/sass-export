@@ -185,5 +185,27 @@ describe('Parser class', () => {
 
       expect(parsedArray[0].mapValue[1].value).be.equal('$bp-medium');
     });
+
+    it('should ignore comments inline', () => {
+      let content = `
+          $font-size: (
+              small: 0.5rem, // 8px
+              medium: 1rem, /* other comment */
+              large: 1.5rem // 24px
+          );
+      `;
+
+      let parser = new Parser(content);
+      let structured = parser.parseStructured();
+
+      expect(structured.variables[0].mapValue[0].name).be.equal('small');
+      expect(structured.variables[0].mapValue[0].value).be.equal('0.5rem');
+
+      expect(structured.variables[0].mapValue[1].name).be.equal('medium');
+      expect(structured.variables[0].mapValue[1].value).be.equal('1rem');
+
+      expect(structured.variables[0].mapValue[2].name).be.equal('large');
+      expect(structured.variables[0].mapValue[2].value).be.equal('1.5rem');
+    });
   });
 });
