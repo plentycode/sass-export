@@ -186,6 +186,38 @@ describe('Parser class', () => {
       expect(parsedArray[0].mapValue[1].value).be.equal('$bp-medium');
     });
 
+    it('should parse map with single quote keys', () => {
+      let content = `$breakpoints: (
+        'small': 767px,
+        'medium': $bp-medium,
+        'large': 1200px
+      );`;
+
+      let parser = new Parser(content);
+      let parsedArray = parser.parse();
+
+      expect(parsedArray[0].mapValue[0].name).be.equal('small');
+      expect(parsedArray[0].mapValue[0].value).be.equal('767px');
+
+      expect(parsedArray[0].mapValue[1].value).be.equal('$bp-medium');
+    });
+
+    it('should parse map with double quote keys', () => {
+      let content = `$breakpoints: (
+        "small": 767px,
+        "medium": $bp-medium,
+        "large": 1200px
+      );`;
+
+      let parser = new Parser(content);
+      let parsedArray = parser.parse();
+
+      expect(parsedArray[0].mapValue[0].name).be.equal('small');
+      expect(parsedArray[0].mapValue[0].value).be.equal('767px');
+
+      expect(parsedArray[0].mapValue[1].value).be.equal('$bp-medium');
+    });
+
     it('should ignore comments inline', () => {
       let content = `
           $font-size: (
