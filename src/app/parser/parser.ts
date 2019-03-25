@@ -1,9 +1,10 @@
 const VARIABLE_PATERN = '(?!\\d)[\\w_-][\\w\\d_-]*';
 const VALUE_PATERN = '[^;]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
 const DECLARATION_PATTERN =
-  `\\$'?(${VARIABLE_PATERN})'?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
+  `\\$['"]?(${VARIABLE_PATERN})['"]?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
 
-const MAP_DECLARATIOM_REGEX = /'?((?!\d)[\w_-][\w\d_-]*)'?\s*:\s*([^,)\/]+)/gi;
+const MAP_DECLARATIOM_REGEX = /['"]?((?!\d)[\w_-][\w\d_-]*)['"]?\s*:\s*([^,)\/]+)/gi;
+
 const QUOTES_PATTERN = /^(['"]).*\1$/;
 const QUOTES_REPLACE = /^(['"])|(['"])$/g;
 
@@ -21,21 +22,20 @@ export class Parser {
     this.rawContent = rawContent;
   }
 
-
   public parse(): IDeclaration[] {
     let matches = this.extractDeclarations(this.rawContent);
     let declarations = [];
 
     for (let match of matches) {
       if (!this.checkIsSectionStart(match) && !this.checkIsSectionStart(match)) {
-        let parsed = this.parseSingleDecaration(match);
+        let parsed = this.parseSingleDeclaration(match);
 
         if (parsed) {
           let map = this.extractMapDeclarations(parsed.value);
 
           // in case the variable is a sass map
           if (map.length) {
-            parsed.mapValue = map.map((declaration) => this.parseSingleDecaration(`$${declaration};`));
+            parsed.mapValue = map.map((declaration) => this.parseSingleDeclaration(`$${declaration};`));
           }
 
           declarations.push(parsed);
@@ -69,14 +69,14 @@ export class Parser {
       } else if (this.checkIsSectionEnd(match)) {
         currentSection = DEFAULT_SECTION;
       } else {
-        let parsed = this.parseSingleDecaration(match);
+        let parsed = this.parseSingleDeclaration(match);
 
         if (parsed) {
           let map = this.extractMapDeclarations(parsed.value);
 
           // in case the variable is a sass map
           if (map.length) {
-            parsed.mapValue = map.map((declaration) => this.parseSingleDecaration(`$${declaration};`));
+            parsed.mapValue = map.map((declaration) => this.parseSingleDeclaration(`$${declaration};`));
           }
 
           declarations[currentSection].push(parsed);
@@ -120,7 +120,7 @@ export class Parser {
   }
 
 
-  private parseSingleDecaration(matchDeclaration: string): IDeclaration {
+  private parseSingleDeclaration(matchDeclaration: string): IDeclaration {
     let matches = matchDeclaration
       .replace(/\s*!(default|global)\s*;/, ';')
       .match(new RegExp(DECLARATION_PATTERN));
