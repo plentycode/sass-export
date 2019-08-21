@@ -21,3 +21,9 @@ $icons: (
   'glass': "value",
    music: "value",
 );
+
+// @sass-export-section="map-get"
+$map-get: (
+  breakpoint: map-get($bps, 'mobile'),
+  icon: map-get($icons, music)
+);

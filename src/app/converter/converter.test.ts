@@ -154,27 +154,21 @@ describe('Converter class', () => {
   });
 
   describe('map support', () => {
-    it('should work even if input files is not an array', () => {
-      let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
-      let converter = new Converter(opts);
-      let structured = converter.getStructured();
+    let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
+    let converter = new Converter(opts);
+    let structured = converter.getStructured();
 
+    it('should work even if input files is not an array', () => {
       expect(structured.variables[0]).to.have.property('compiledValue');
     });
 
     it('should compile values inside a map', () => {
-      let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
-      let converter = new Converter(opts);
-      let structured = converter.getStructured();
-
       expect(structured.variables[0]).to.have.property('compiledValue');
       expect(structured.variables[0]).to.have.property('mapValue');
       expect(structured.variables[0].mapValue[0]).to.have.property('compiledValue');
     });
 
     it('should compile values inside a map as array also', () => {
-      let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
-      let converter = new Converter(opts);
       let result = converter.getArray();
 
       expect(result[0]).to.have.property('compiledValue');
@@ -183,14 +177,22 @@ describe('Converter class', () => {
     });
 
     it('should work with variables in quotes', () => {
-      let opts = { inputFiles: path.resolve('./test/scss/_maps.scss'), includePaths: [] };
-      let converter = new Converter(opts);
-      let structured = converter.getStructured();
-
       expect(structured.icons[0]).to.have.property('mapValue');
       expect(structured.icons[0].mapValue[0].name).to.be.equal('glass');
       expect(structured.icons[0].mapValue[0].value).to.be.equal('value');
       expect(structured.icons[0].mapValue[0].compiledValue).to.be.equal('value');
+    });
+
+    it('should work with map-get within maps', () => {
+      let result = structured['map-get'][0];
+      expect(result).to.have.property('mapValue');
+      let map = result.mapValue;
+      expect(map[0].name).to.be.equal('breakpoint');
+      expect(map[0].value).to.be.equal('map-get($bps, \'mobile\')');
+      expect(map[0].compiledValue).to.be.equal('320px');
+      expect(map[1].name).to.be.equal('icon');
+      expect(map[1].value).to.be.equal('map-get($icons, music)');
+      expect(map[1].compiledValue).to.be.equal('value');
     });
   });
 
