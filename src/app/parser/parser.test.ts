@@ -239,5 +239,22 @@ describe('Parser class', () => {
       expect(structured.variables[0].mapValue[2].name).be.equal('large');
       expect(structured.variables[0].mapValue[2].value).be.equal('1.5rem');
     });
+
+    it('should parse map-get calls', () => {
+      let content = `$source: (
+        one: #ff0000
+      );
+
+      $dest: (
+        two: map-get($source, one)
+      );`;
+
+      let parser = new Parser(content);
+      let structured = parser.parseStructured();
+      let map = structured.variables[1].mapValue;
+
+      expect(map[0].name).be.equal('two');
+      expect(map[0].value).be.equal('map-get($source, one)');
+    });
   });
 });
