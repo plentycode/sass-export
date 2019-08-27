@@ -256,5 +256,38 @@ describe('Parser class', () => {
       expect(map[0].name).be.equal('two');
       expect(map[0].value).be.equal('map-get($source, one)');
     });
+
+    it('should allow function calls with multiple arguments in values', () => {
+      let content = `$funcs: (
+        max: max(1px, 4px), // 4px
+        min: min(1px, 4px), // 1px
+        str-index: str-index("Helvetica Neue", "Neue"), // 11
+        adjust-color: adjust-color(#d2e1dd, $red: -10, $blue: 10), // #c8e1e7
+        rgba: rgba(255, 0, 0, .5), // rgba(255, 0, 0, 0.5)
+        darken: darken(#b37399, 20%), // #7c4465
+      );`;
+
+      let parser = new Parser(content);
+      let structured = parser.parseStructured();
+      let map = structured.variables[0].mapValue;
+
+      expect(map[0].name).be.equal('max');
+      expect(map[0].value).be.equal('max(1px, 4px)');
+
+      expect(map[1].name).be.equal('min');
+      expect(map[1].value).be.equal('min(1px, 4px)');
+
+      expect(map[2].name).be.equal('str-index');
+      expect(map[2].value).be.equal('str-index("Helvetica Neue", "Neue")');
+
+      expect(map[3].name).be.equal('adjust-color');
+      expect(map[3].value).be.equal('adjust-color(#d2e1dd, $red: -10, $blue: 10)');
+
+      expect(map[4].name).be.equal('rgba');
+      expect(map[4].value).be.equal('rgba(255, 0, 0, .5)');
+
+      expect(map[5].name).be.equal('darken');
+      expect(map[5].value).be.equal('darken(#b37399, 20%)');
+    });
   });
 });

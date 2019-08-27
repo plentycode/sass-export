@@ -194,6 +194,27 @@ describe('Converter class', () => {
       expect(map[1].value).to.be.equal('map-get($icons, music)');
       expect(map[1].compiledValue).to.be.equal('value');
     });
+
+    it('should allow function calls with multiple arguments in values', () => {
+      let result = structured['funcs'][0];
+      expect(result).to.have.property('mapValue');
+      let map = result.mapValue;
+
+      let expected = [
+        { name: 'max', value: 'max(1px, 4px)', compiled: '4px' },
+        { name: 'min', value: 'min(1px, 4px)', compiled: '1px' },
+        { name: 'str-index', value: 'str-index("Helvetica Neue", "Neue")', compiled: '11' },
+        { name: 'adjust-color', value: 'adjust-color(#d2e1dd, $red: -10, $blue: 10)', compiled: '#c8e1e7' },
+        { name: 'rgba', value: 'rgba(255, 0, 0, .5)', compiled: 'rgba(255, 0, 0, 0.5)' },
+        { name: 'darken', value: 'darken(#b37399, 20%)', compiled: '#7c4465' }
+      ];
+
+      expected.forEach(({name, value, compiled}, ix) => {
+        expect(map[ix].name).to.be.equal(name);
+        expect(map[ix].value).to.be.equal(value);
+        expect(map[ix].compiledValue).to.be.equal(compiled);
+      });
+    });
   });
 
   describe('mixins support', () => {
