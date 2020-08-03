@@ -35,9 +35,9 @@
   },
   "license": "ISC",
   "dependencies": {
-    "glob": "^7.1.2",
-    "minimist": "^1.2.0",
-    "node-sass": "^4.5.2"
+    "glob": "^7.1.6",
+    "minimist": "^1.2.5",
+    "node-sass": "^4.14.1"
   },
   "repository": {
     "type": "git",

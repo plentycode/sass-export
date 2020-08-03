@@ -45,7 +45,7 @@ export class Converter {
 
 
   public compileStructure(structuredDeclaration: IDeclaration): object {
-    let groups = Object.keys(structuredDeclaration);
+    const groups = Object.keys(structuredDeclaration);
 
     groups.forEach((group) => {
       let content = this.getContent();
@@ -70,32 +70,19 @@ export class Converter {
 
 
   public getContent(): string {
-    let inputFiles = [];
-    let inputs = [];
-
-    if (!Array.isArray(this.options.inputFiles)) {
-      inputFiles.push(this.options.inputFiles);
-    } else {
-      inputFiles = this.options.inputFiles;
-    }
-
-    inputFiles.forEach((path) => {
-      let files = glob.sync(String(path));
-      inputs.push(...files);
-    });
-
-    let contents = inputs.map((filePath) => fs.readFileSync(String(filePath)));
-
-    return contents.join(LINE_BREAK);
+    return [].concat(this.options.inputFiles)
+            .reduce((acc, val) => acc.concat(glob.sync(String(val))), [])
+            .map(filePath => fs.readFileSync(String(filePath)))
+            .join(LINE_BREAK)
+            .replace(/\/\*[\w\W\r\n]*?\*\/|\/\/.*/g, '');
   }
 
-
   private checkForMixins(structuredDeclaration: object) {
-    let mixinsGroup = 'mixins';
-    let parsedMixins = new Mixins(this.getContent()).parse();
+    const mixinsGroup = 'mixins';
+    const parsedMixins = new Mixins(this.getContent()).parse();
 
     if (parsedMixins && parsedMixins.length) {
-      structuredDeclaration[mixinsGroup] =  parsedMixins;
+      structuredDeclaration[mixinsGroup] = parsedMixins;
     }
 
     return structuredDeclaration;
@@ -103,20 +90,20 @@ export class Converter {
 
 
   private renderPropertyValue(content: string, declaration: IDeclaration): string {
+    let wrappedRendered = ''; //if the property can't be rendered, then it should return an empty string
+
     try {
-      let rendered = sass.renderSync({
+      const rendered = sass.renderSync({
         data: content + LINE_BREAK + Utils.wrapCss(declaration),
         includePaths: this.options.includePaths,
         outputStyle: 'compact'
       });
 
-      let wrappedRendered = String(rendered.css);
-
-      return Utils.unWrapValue(wrappedRendered);
-
+      wrappedRendered = Utils.unWrapValue(String(rendered.css));
     } catch (err) {
       console.error(err);
-      return ''; // if the property can't be rendered, then it should return an empty string
     }
+
+    return wrappedRendered;
   }
 }

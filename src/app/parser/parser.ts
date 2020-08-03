@@ -87,41 +87,23 @@ export class Parser {
     return declarations;
   }
 
-
-  private extractDeclarationsStructured(content: string): [any] {
+  private extractDeclarationsStructured(content: string): any {
     const matches = content.match(new RegExp(`${DECLARATION_PATTERN}|${SECTION_PATTERN}|${END_SECTION_PATTERN}`, 'g'));
-
-    if (!matches) {
-      return [] as any;
-    }
-
-    return matches as any;
+    return matches || [];
   }
 
-
-  private extractDeclarations(content: string): [any] {
+  private extractDeclarations(content: string): any {
     const matches = content.match(new RegExp(DECLARATION_PATTERN, 'g'));
-
-    if (!matches) {
-      return [] as any;
-    }
-
-    return matches as any;
+    return matches || [];
   }
 
-  private extractMapDeclarations(content: string): [any] {
+  private extractMapDeclarations(content: string): any {
     const matches = content.match(new RegExp(MAP_DECLARATIOM_REGEX, 'g'));
-
-    if (!matches) {
-      return [] as any;
-    }
-
-    return matches as any;
+    return matches || [];
   }
-
 
   private parseSingleDeclaration(matchDeclaration: string): IDeclaration {
-    let matches = matchDeclaration
+    const matches = matchDeclaration
       .replace(/\s*!(default|global)\s*;/, ';')
       .match(new RegExp(DECLARATION_PATTERN));
 
