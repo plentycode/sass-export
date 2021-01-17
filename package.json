@@ -13,7 +13,7 @@
     "prepare": "npm run build",
     "prestart": "npm run build",
     "watch": "npm run build -- --watch",
-    "test": "TS_NODE_FILES=true  mocha -r ts-node/register src/**/*.test.ts"
+    "test": "TS_NODE_FILES=true mocha -r ts-node/register src/**/*.test.ts"
   },
   "engines": {
     "node": ">=10"
