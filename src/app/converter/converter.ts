@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import * as sass from 'sass';
+import * as sass from 'node-sass';
 import * as glob from 'glob';
 import { Parser, Mixins } from '../parser';
 import { Utils } from '../utils';
@@ -107,7 +107,7 @@ export class Converter {
       let rendered = sass.renderSync({
         data: content + LINE_BREAK + Utils.wrapCss(declaration),
         includePaths: this.options.includePaths,
-        outputStyle: 'compressed'
+        outputStyle: 'compact'
       });
 
       let wrappedRendered = String(rendered.css);
