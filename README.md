@@ -7,7 +7,7 @@ This is perfect for generating your site documentation.
 [![Dependency Status](https://david-dm.org/plentycode/sass-export.svg?theme=shields.io)](https://david-dm.org/plentycode/sass-export)
 
 Try it online:
-[Playground (demo)](https://goo.gl/Q9CMzS)
+[Playground (demo)](https://sass-export.plentycode.com/)
 
 #### CLI
 Install it from NPM
@@ -231,7 +231,7 @@ console.log(asArray)
 ```
 
 ### Tech Dependencies
-We recommend using [Node.js](https://nodejs.org/) v6+.
+We recommend using [Node.js](https://nodejs.org/) v10+.
 
 
 Has dependencies on these projects:
