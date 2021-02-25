@@ -201,6 +201,8 @@ describe('Converter class', () => {
       let map = result.mapValue;
 
       let expected = [
+        { name: 'max', value: 'max(1px, 4px)', compiled: '4px' },
+        { name: 'min', value: 'min(1px, 4px)', compiled: '1px' },
         { name: 'str-index', value: 'str-index("Helvetica Neue", "Neue")', compiled: '11' },
         { name: 'adjust-color', value: 'adjust-color(#d2e1dd, $red: -10, $blue: 10)', compiled: '#c8e1e7' },
         { name: 'rgba', value: 'rgba(255, 0, 0, .5)', compiled: 'rgba(255, 0, 0, 0.5)' },

@@ -30,8 +30,10 @@ $map-get: (
 
 // @sass-export-section="funcs"
 $funcs: (
-  'str-index': str-index("Helvetica Neue", "Neue"),
-  'adjust-color': adjust-color(#d2e1dd, $red: -10, $blue: 10),
-  'rgba': rgba(255, 0, 0, .5),
-  'darken': darken(#b37399, 20%)
+  max: max(1px, 4px),
+  min: min(1px, 4px),
+  str-index: str-index("Helvetica Neue", "Neue"),
+  adjust-color: adjust-color(#d2e1dd, $red: -10, $blue: 10),
+  rgba: rgba(255, 0, 0, .5),
+  darken: darken(#b37399, 20%)
 );
