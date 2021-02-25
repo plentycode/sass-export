@@ -9,7 +9,7 @@ describe('buffers support', () => {
 
   it('should resolve from buffer', () => {
     let input = [];
-    input.push(Buffer.alloc(1,'$white: red;'));
+    input.push(new Buffer('$white: red;'));
     let converter = new ConverterBuffer(input);
 
     converter.getData().then((result) => {
@@ -45,7 +45,7 @@ describe('buffers support', () => {
     let input = [];
     let options = { type: 'array' };
 
-    input.push(Buffer.alloc(1,'$white: red; $size: $white;'));
+    input.push(new Buffer('$white: red; $size: $white;'));
 
     let converter = new ConverterBuffer(input, options);
 
