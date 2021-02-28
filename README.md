@@ -1,26 +1,27 @@
 # Sass-Export
+
 **Sass-export** takes SCSS files and export them to a JSON file you can use as data.
 This is perfect for generating your site documentation.
 
 [![Build Status](https://travis-ci.org/plentycode/sass-export.svg?branch=master&style=flat)](https://travis-ci.org/plentycode/sass-export)
-[![npm version](https://badge.fury.io/js/sass-export.svg)](http://badge.fury.io/js/sass-export)
 ![Total Downloads](https://img.shields.io/npm/dt/sass-export?style=flat-square)
 ![Follow @plenty_code](https://img.shields.io/twitter/follow/plenty_code.svg?style=flat-square&color=1da1f2)
+[![Donate via Patreon](https://img.shields.io/badge/donate-patreon-orange.svg?style=flat-square&logo=patreon)](https://www.patreon.com/plentycode)
 
-Try it online:
-[Playground (demo)](https://sass-export.plentycode.com/)
+## Try it online: [Playground (demo)](https://sass-export.plentycode.com/)
 
-#### CLI
+## CLI
+
 Install it from NPM
 
-```
-$ npm install -g sass-export
+``` bash
+ npm install -g sass-export
 ```
 
 Ready to export:
 
-```
-$ sass-export scss/config/*.scss -o exported-sass-array.json -a
+``` bash
+ sass-export scss/config/*.scss -o exported-sass-array.json -a
 ```
 
 ### Here's a sample output
@@ -52,6 +53,7 @@ _output_: [exported-sass-array.json]
 ```
 
 ### Section Groups Annotations
+
 You can easily organize your variables into a Javascript object using sass-export annotations:
 
 _input:_ _annotations.scss
@@ -79,12 +81,14 @@ $global-group: #FF0000;
 ```
 
 Then we run sass-export:
-```
-$ sass-export scss/_annotations.scss -o exported-grouped.json
+
+``` bash
+ sass-export scss/_annotations.scss -o exported-grouped.json
 ```
 
 
 _output_ [exported-grouped.json]
+
 ``` javascript
 {
     "variables": [
@@ -105,9 +109,11 @@ _output_ [exported-grouped.json]
 ```
 
 ### Include Paths for @import
+
 In order to support @import we need to include **--dependencies** parameter with a comma separated list of the folder path to include:
-```
-$ sass-export scss/_fonts.scss -o=exported-dependencies.json  -d "src/sass/config/, src/sass/libs/"
+
+``` bash
+sass-export scss/_fonts.scss -o=exported-dependencies.json  -d "src/sass/config/, src/sass/libs/"
 ```
 
 in order to use:
@@ -118,12 +124,14 @@ in order to use:
 
 $imported-value: $bp-desktop;
 $font-size: $global-font-size;
-````
+```
 
 ### Map support
+
 In case you wanted your sass Maps variable to be an array we included te **mapValue** property for variables identified as maps.
 
-_input:_ _breackpoints.scss
+_input:_ _breakpoints.scss
+
 ``` scss
 $breakpoints: (
   small: 767px,
@@ -131,6 +139,7 @@ $breakpoints: (
   large: 1200px
 );
 ```
+
 _output:_ [exported-maps.json]
 
 ```javascript
@@ -138,7 +147,7 @@ _output:_ [exported-maps.json]
   "variables": [
     {
       "name": "$breakpoints",
-      "value": "(small: 767px,\n  medium: 992px,\n  large: 1200px\n)",
+      "value": "(small: 767px,  medium: 992px,  large: 1200px)",
       "mapValue": [
         { "name": "small", "value": "767px", "compiledValue": "767px" },
         { "name": "medium","value": "992px", "compiledValue": "992px" },
@@ -148,22 +157,29 @@ _output:_ [exported-maps.json]
     }
 }
 ```
+
 ### Mixin/Function support
+
 For mixins and functions we've added a reserved 'mixins' group for it.
 
 _input:_ _mixins.scss
+
 ``` scss
 @mixin box($p1, $p2) {
   @content;
 }
+
 @function my-function($val) {
 }
+
 @mixin z($val: 10px, $p2: '#COFF33') {
   @content;
 }
+
 @mixin no-params() {
 }
 ````
+
 _output:_ [exported-mixins.json]
 
 ```javascript
@@ -201,43 +217,36 @@ import syntax:
 Require syntax:
 
 ``` javascript
-var exporter = require('sass-export').exporter;
+const exporter = require('sass-export').exporter;
 
-var exporterBuffer = require('sass-export').buffer;
+const exporterBuffer = require('sass-export').buffer;
 ```
 
-#### Example:
+### Example
 
 Written using ES5 syntax.
+
 ``` javascript
 
-var exporter = require('sass-export').exporter;
+const exporter = require('sass-export').exporter;
 
 //basic options
-var options = {
+const options = {
   inputFiles: ['_variables.scss', '_fonts.scss'],
   includePaths: ['libs/'] // don't forget this is the folder path not the files
 };
 
 // you can get an object {variables:[], colors: []}
-var asObject = exporter(options).getStructured();
+const asObject = exporter(options).getStructured();
 
 console.log(asObject.variables);
 console.log(asObject.colors);
 
 // or get an array [{}, {}]
-var asArray = exporter(options).getArray();
+const asArray = exporter(options).getArray();
+
 console.log(asArray)
 ```
-
-### Tech Dependencies
-We recommend using [Node.js](https://nodejs.org/) v10+.
-
-
-Has dependencies on these projects:
-
-* [node.js] - evented I/O for the backend.
-* [Node-Sass] - library that provides binding for Node.js to LibSass, the C version of the popular stylesheet preprocessor, Sass.
 
 ### Usage
 
@@ -252,16 +261,19 @@ Usage: sass-export [inputFiles] [options]
 
 
 ### Other utilities based on this tool
-  - Gulp plugin: [gulp-sass-export]
+
+- Gulp plugin: [gulp-sass-export]
 
 
 ### Contributing
+
 Please feel free to submit pull requests or open issues to improve this tool.
 Also keep checking [issues][issues] section and grab some items to help!
 
 Check our [Contributing][contributing] page for more information.
 
 License
+
 ----
 
 MIT
@@ -270,12 +282,10 @@ MIT
 
 This is an open source project and completely free to use.
 
-However, the amount of effort needed to maintain and develop new features and products within the Plentycode ecosystem is not sustainable without proper financial backing. If you have the capability, please consider donating using the links below:
+However, the amount of effort needed to maintain and develop new features and products within the Plentycode ecosystem is not sustainable without proper financial backing. If you have the capability, please consider donating using the link below:
 
 <div align="center">
-
 [![Donate via Patreon](https://img.shields.io/badge/donate-patreon-orange.svg?style=flat-square&logo=patreon)](https://www.patreon.com/plentycode)
-
 </div>
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
