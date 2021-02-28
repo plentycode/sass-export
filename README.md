@@ -285,7 +285,9 @@ This is an open source project and completely free to use.
 However, the amount of effort needed to maintain and develop new features and products within the Plentycode ecosystem is not sustainable without proper financial backing. If you have the capability, please consider donating using the link below:
 
 <div align="center">
+
 [![Donate via Patreon](https://img.shields.io/badge/donate-patreon-orange.svg?style=flat-square&logo=patreon)](https://www.patreon.com/plentycode)
+
 </div>
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
