@@ -4,7 +4,8 @@ This is perfect for generating your site documentation.
 
 [![Build Status](https://travis-ci.org/plentycode/sass-export.svg?branch=master&style=flat)](https://travis-ci.org/plentycode/sass-export)
 [![npm version](https://badge.fury.io/js/sass-export.svg)](http://badge.fury.io/js/sass-export)
-[![Dependency Status](https://david-dm.org/plentycode/sass-export.svg?theme=shields.io)](https://david-dm.org/plentycode/sass-export)
+![Total Downloads](https://img.shields.io/npm/dt/sass-export?style=flat-square)
+![Follow @plenty_code](https://img.shields.io/twitter/follow/plenty_code.svg?style=flat-square&color=1da1f2)
 
 Try it online:
 [Playground (demo)](https://sass-export.plentycode.com/)
@@ -189,15 +190,7 @@ _output:_ [exported-mixins.json]
 ```
 
 
-## Want to use it in your Node App?
-Just import it!
-
-Require syntax:
-``` javascript
-var exporter = require('sass-export').exporter;
-
-var exporterBuffer = require('sass-export').buffer;
-```
+## Import it in your Node App?
 
 import syntax:
 
@@ -205,6 +198,13 @@ import syntax:
  import { exporter } from 'sass-export';
 ```
 
+Require syntax:
+
+``` javascript
+var exporter = require('sass-export').exporter;
+
+var exporterBuffer = require('sass-export').buffer;
+```
 
 #### Example:
 
@@ -251,8 +251,8 @@ Usage: sass-export [inputFiles] [options]
 |  -h, --help           |   Boolean   |  Shows up this help screen. |
 
 
-### New utilities
-  * Gulp plugin: [gulp-sass-export]
+### Other utilities based on this tool
+  - Gulp plugin: [gulp-sass-export]
 
 
 ### Contributing
@@ -265,6 +265,18 @@ License
 ----
 
 MIT
+
+## Supporting
+
+This is an open source project and completely free to use.
+
+However, the amount of effort needed to maintain and develop new features and products within the Plentycode ecosystem is not sustainable without proper financial backing. If you have the capability, please consider donating using the links below:
+
+<div align="center">
+
+[![Donate via Patreon](https://img.shields.io/badge/donate-patreon-orange.svg?style=flat-square&logo=patreon)](https://www.patreon.com/plentycode)
+
+</div>
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
