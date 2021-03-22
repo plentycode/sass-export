@@ -16,7 +16,7 @@ export class Utils {
 
 
   public static wrapCss(cssDeclaration: IDeclaration): string {
-    return `${WRAPPER_CSS_ID}.${cssDeclaration.name}{content:"#{${cssDeclaration.value}}";}`;
+    return `${WRAPPER_CSS_ID}.${cssDeclaration.name}{content:"#{inspect(${cssDeclaration.value})}";}`;
   }
 
 
