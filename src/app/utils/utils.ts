@@ -19,6 +19,10 @@ export class Utils {
     return `${WRAPPER_CSS_ID}.${cssDeclaration.name}{content:"#{inspect(${cssDeclaration.value})}";}`;
   }
 
+  public static removeDoubleQuotes(wrappedContent: string): string {
+    wrappedContent = wrappedContent.replace(/"([^'"]+(?="'))"/, '$1');
+    return wrappedContent;
+  }
 
   public static unWrapValue(wrappedContent: string): string {
     wrappedContent = wrappedContent.replace(/\n/g, '');
