@@ -292,9 +292,9 @@ However, the amount of effort needed to maintain and develop new features and pr
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen.)
 
-[node.js]: <http://nodejs.org>
-[node-sass]: <https://github.com/sass/node-sass>
-[gulp-sass-export]: <https://github.com/plentycode/gulp-sass-export>
+[node.js]: <https://nodejs.org>
+[dart-sass]: <https://github.com/sass/node-sass>
+[gulp-sass-export]: <https://github.com/sass/dart-sass>
 [exported-sass-array.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/array.json>
 [exported-grouped.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/annotations.json>
 [exported-maps.json]: <https://raw.githubusercontent.com/plentycode/sass-export/develop/exported-examples/maps-object.json>
