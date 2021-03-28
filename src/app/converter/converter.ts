@@ -111,7 +111,7 @@ export class Converter {
       });
 
       let wrappedRendered = String(rendered.css);
-
+      wrappedRendered = Utils.removeDoubleQuotes(wrappedRendered);
       return Utils.unWrapValue(wrappedRendered);
 
     } catch (err) {
