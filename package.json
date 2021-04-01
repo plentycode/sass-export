@@ -10,7 +10,7 @@
   "scripts": {
     "build": "tsc --p tsconfig.json",
     "dev": "npm run build & npm run test",
-    "prepare": "npm run build",
+    "prepublish": "npm run build",
     "prestart": "npm run build",
     "watch": "npm run build -- --watch",
     "test": "mocha -r ts-node/register src/**/*.test.ts"
