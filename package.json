@@ -4,7 +4,6 @@
   "description": "Exports Sass files to Json format, able to manage sections with annotations in comments.",
   "main": "./dist/index.js",
   "files": [
-    "src",
     "bin",
     "dist"
   ],
@@ -12,7 +11,6 @@
     "build": "tsc --p tsconfig.json",
     "dev": "npm run build & npm run test",
     "prepublish": "npm run build",
-    "postinstall": "npm run build",
     "watch": "npm run build -- --watch",
     "test": "mocha -r ts-node/register src/**/*.test.ts"
   },
