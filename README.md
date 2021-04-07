@@ -5,7 +5,6 @@ This is perfect for generating your site documentation.
 
 [![Build Status](https://travis-ci.org/plentycode/sass-export.svg?branch=master&style=flat)](https://travis-ci.org/plentycode/sass-export)
 ![Total Downloads](https://img.shields.io/npm/dt/sass-export?style=flat-square)
-![Follow @plenty_code](https://img.shields.io/twitter/follow/plenty_code.svg?style=flat-square&color=1da1f2)
 [![Donate via Patreon](https://img.shields.io/badge/donate-patreon-orange.svg?style=flat-square&logo=patreon)](https://www.patreon.com/plentycode)
 
 ## Try it online: [Playground (demo)](https://sass-export.plentycode.com/)
