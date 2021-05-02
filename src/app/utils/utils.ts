@@ -15,8 +15,11 @@ export class Utils {
   }
 
 
-  public static wrapCss(cssDeclaration: IDeclaration): string {
-    return `${WRAPPER_CSS_ID}.${cssDeclaration.name}{content:"#{inspect(${cssDeclaration.value})}";}`;
+  public static wrapCss(cssDeclaration: IDeclaration, useInspect: boolean): string {
+    if (useInspect) {
+      return `${WRAPPER_CSS_ID}.${cssDeclaration.name}{content:"#{inspect(${cssDeclaration.value})}";}`;
+    }
+    return `${WRAPPER_CSS_ID}.${cssDeclaration.name}{content:"#{${cssDeclaration.value}}";}`;
   }
 
   public static removeDoubleQuotes(wrappedContent: string): string {
