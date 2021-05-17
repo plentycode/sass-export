@@ -3,7 +3,7 @@ const VALUE_PATERN = '[^;]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
 const DECLARATION_PATTERN =
   `\\$['"]?(${VARIABLE_PATERN})['"]?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
 
-const MAP_DECLARATIOM_REGEX = /['"]?((?!\d)[\w_-][\w\d_-]*)['"]?\s*:\s*([a-z\-]+\([^\)]+\)|[^\),\/]+)/gi;
+const MAP_DECLARATIOM_REGEX = /['"]?((?!\d)[\w_-][\w\d_-]*)['"]?\s*:\s*([a-z\-]+\([^\)]+\)|[^\)\(,\/]+|\([^\)]+\))/gi;
 
 const QUOTES_PATTERN = /^(['"]).*\1$/;
 const QUOTES_REPLACE = /^(['"])|(['"])$/g;
@@ -31,13 +31,7 @@ export class Parser {
         let parsed = this.parseSingleDeclaration(match);
 
         if (parsed) {
-          let map = this.extractMapDeclarations(parsed.value);
-
-          // in case the variable is a sass map
-          if (map.length) {
-            parsed.mapValue = map.map((declaration) => this.parseSingleDeclaration(`$${declaration};`));
-          }
-
+          this.parseMapDeclarations(parsed);
           declarations.push(parsed);
         }
       }
@@ -72,13 +66,7 @@ export class Parser {
         let parsed = this.parseSingleDeclaration(match);
 
         if (parsed) {
-          let map = this.extractMapDeclarations(parsed.value);
-
-          // in case the variable is a sass map
-          if (map.length) {
-            parsed.mapValue = map.map((declaration) => this.parseSingleDeclaration(`$${declaration};`));
-          }
-
+          this.parseMapDeclarations(parsed);
           declarations[currentSection].push(parsed);
         }
       }
@@ -138,8 +126,20 @@ export class Parser {
 
     return { name, value } as IDeclaration;
   }
+  private parseMapDeclarations(parsedDeclaration: IDeclaration) {
+    let map = this.extractMapDeclarations(parsedDeclaration.value);
 
+    if (map.length) {
+      parsedDeclaration.mapValue = map.map((declaration) => {
+        const singleDeclaration = this.parseSingleDeclaration(
+          `$${declaration};`
+        );
+        this.parseMapDeclarations(singleDeclaration);
 
+        return singleDeclaration;
+      });
+    }
+  }
   private checkIsSectionStart(content: string): boolean {
     return (new RegExp(SECTION_PATTERN, 'gi')).test(content);
   }
