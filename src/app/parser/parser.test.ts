@@ -30,6 +30,16 @@ describe('Parser class', () => {
     expect(validParser.parse()[0].value).to.be.equal('#4f6f7b');
   });
 
+  it('should return variable name with underscore', () => {
+    let rawContent = '$color_dark_red: #400;';
+    let validParser = new Parser(rawContent);
+
+    expect(validParser.parse()).that.is.an('array');
+    expect(validParser.parse()).to.have.lengthOf(1);
+    expect(validParser.parse()[0].name).to.be.equal('color_dark_red');
+    expect(validParser.parse()[0].value).to.be.equal('#400');
+  });
+
   it('should ignore unwell formatted declarations', () => {
     let rawContent = `$slate-dark #4f6f7b;
                       not-a-property: red`;
