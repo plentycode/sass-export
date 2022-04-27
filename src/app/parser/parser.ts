@@ -117,7 +117,7 @@ export class Parser {
       return;
     }
 
-    let name = matches[1].trim().replace('_', '-');
+    let name = matches[1].trim();
     let value = matches[2].trim().replace(/\s*\n+\s*/g, ' ');
 
     if (value.match(QUOTES_PATTERN)) {
