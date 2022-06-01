@@ -1,3 +1,9 @@
+#### 原仓库
+https://github.com/plentycode/sass-export
+
+#### 改动点
+增加过滤注释功能
+
 # Sass-Export
 **Sass-export** takes SCSS files and export them to a JSON file you can use as data.
 This is perfect for generating your site documentation.
