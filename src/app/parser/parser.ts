@@ -1,9 +1,9 @@
-const VARIABLE_PATERN = '(?!\\d)[\\w_-][\\w\\d_-]*';
-const VALUE_PATERN = '[^;]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
+const VARIABLE_PATTERN = '(?!\\d)[\\w_-][\\w\\d_-]*';
+const VALUE_PATTERN = '[^;]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
 const DECLARATION_PATTERN =
-  `\\$['"]?(${VARIABLE_PATERN})['"]?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
+  `\\$['"]?(${VARIABLE_PATTERN})['"]?\\s*:\\s*(${VALUE_PATTERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
 
-const MAP_DECLARATIOM_REGEX = /['"]?((?!\d)[\w_-][\w\d_-]*)['"]?\s*:\s*([a-z\-]+\([^\)]+\)|[^\)\(,\/]+|\([^\)]+\))/gi;
+const MAP_DECLARATION_REGEX = /['"]?((?!\d)[\w_-][\w\d_-]*)['"]?\s*:\s*([a-z\-]+\([^\)]+\)|[^\)\(,\/]+|\([^\)]+\))/gi;
 
 const QUOTES_PATTERN = /^(['"]).*\1$/;
 const QUOTES_REPLACE = /^(['"])|(['"])$/g;
@@ -98,7 +98,7 @@ export class Parser {
   }
 
   private extractMapDeclarations(content: string): [any] {
-    const matches = content.match(new RegExp(MAP_DECLARATIOM_REGEX, 'g'));
+    const matches = content.match(new RegExp(MAP_DECLARATION_REGEX, 'g'));
 
     if (!matches) {
       return [] as any;
