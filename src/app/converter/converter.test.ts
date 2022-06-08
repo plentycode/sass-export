@@ -213,6 +213,24 @@ describe('Converter class', () => {
         expect(map[ix].compiledValue).to.be.equal(compiled);
       });
     });
+
+    it('should allow maps with numeric keys', () => {
+      let result = structured['levels'][0];
+      expect(result).to.have.property('mapValue');
+      let map = result.mapValue;
+
+      let expected = [
+        { name: '100', value: '80%', compiledValue: '80%' },
+        { name: '500', value: '0', compiledValue: '0' },
+        { name: '900', value: '80%', compiledValue: '80%' },
+      ];
+
+      expected.forEach(({name, value, compiledValue}, ix) => {
+        expect(map[ix].name).to.be.equal(name);
+        expect(map[ix].value).to.be.equal(value);
+        expect(map[ix].compiledValue).to.be.equal(compiledValue);
+      });
+    });
   });
 
   describe('mixins support', () => {

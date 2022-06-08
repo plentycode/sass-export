@@ -35,3 +35,10 @@ $funcs: (
   'rgba': rgba(255, 0, 0, .5),
   'darken': darken(#b37399, 20%)
 );
+
+// @sass-export-section="levels"
+$levels: (
+  100: 80%,
+  500: 0,
+  900: 80%
+);

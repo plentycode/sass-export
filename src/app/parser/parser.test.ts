@@ -47,6 +47,12 @@ describe('Parser class', () => {
 
     expect(parser.parse()).that.is.an('array');
     expect(parser.parse()).to.be.empty;
+
+    rawContent = '$0: test;';
+    parser = new Parser(rawContent);
+
+    expect(parser.parse()).that.is.an('array');
+    expect(parser.parse()).to.be.empty;
   });
 
   describe('parseStructured Validations', () => {
@@ -228,6 +234,26 @@ describe('Parser class', () => {
       expect(parsedArray[0].mapValue[1].value).be.equal('$bp-medium');
     });
 
+    it('should parse map with numeric keys', () => {
+      let content = `$levels: (
+        100: 80%,
+        500: 0,
+        900: 80%
+      );`;
+
+      let parser = new Parser(content);
+      let parsedArray = parser.parse();
+
+      expect(parsedArray[0].mapValue[0].name).be.equal('100');
+      expect(parsedArray[0].mapValue[0].value).be.equal('80%');
+
+      expect(parsedArray[0].mapValue[1].name).be.equal('500');
+      expect(parsedArray[0].mapValue[1].value).be.equal('0');
+
+      expect(parsedArray[0].mapValue[2].name).be.equal('900');
+      expect(parsedArray[0].mapValue[2].value).be.equal('80%');
+    });
+
     it('should ignore comments inline', () => {
       let content = `
           $font-size: (
@@ -397,6 +423,32 @@ describe('Parser class', () => {
       expect(parsedArray[0].mapValue[2].mapValue[0].value).be.equal('1200px');
 
       expect(parsedArray[0].mapValue[2].mapValue[1].value).be.equal('$bp-xl');
+    });
+
+    it('should parse map with numeric keys', () => {
+      let content = `$content: (
+        0: 0,
+        1: 1,
+        2: (
+          0: 0,
+          1: 1,
+          2: 2
+        )
+      );`;
+
+      let parser = new Parser(content);
+      let parsedArray = parser.parse();
+
+      expect(parsedArray[0].mapValue[2].name).be.equal('2');
+
+      expect(parsedArray[0].mapValue[2].mapValue[0].name).be.equal('0');
+      expect(parsedArray[0].mapValue[2].mapValue[0].value).be.equal('0');
+
+      expect(parsedArray[0].mapValue[2].mapValue[1].name).be.equal('1');
+      expect(parsedArray[0].mapValue[2].mapValue[1].value).be.equal('1');
+
+      expect(parsedArray[0].mapValue[2].mapValue[2].name).be.equal('2');
+      expect(parsedArray[0].mapValue[2].mapValue[2].value).be.equal('2');
     });
   });
 });
