@@ -98,7 +98,11 @@ export class Converter {
 
     let contents = inputs.map((filePath) => fs.readFileSync(String(filePath)));
 
-    return contents.join(LINE_BREAK);
+    let strContents = contents.join(LINE_BREAK);
+    strContents = strContents.replace(/\/\*[\w\W\r\n]*?\*\//g, '');
+    strContents = strContents.split(LINE_BREAK).filter(v=> v.indexOf('//') === -1).join(LINE_BREAK);
+
+    return strContents;
   }
 
 
