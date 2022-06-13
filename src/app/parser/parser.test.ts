@@ -30,6 +30,16 @@ describe('Parser class', () => {
     expect(validParser.parse()[0].value).to.be.equal('#4f6f7b');
   });
 
+  it('should return variable name with underscore', () => {
+    let rawContent = '$color_dark_red: #400;';
+    let validParser = new Parser(rawContent);
+
+    expect(validParser.parse()).that.is.an('array');
+    expect(validParser.parse()).to.have.lengthOf(1);
+    expect(validParser.parse()[0].name).to.be.equal('color_dark_red');
+    expect(validParser.parse()[0].value).to.be.equal('#400');
+  });
+
   it('should ignore unwell formatted declarations', () => {
     let rawContent = `$slate-dark #4f6f7b;
                       not-a-property: red`;
@@ -259,8 +269,6 @@ describe('Parser class', () => {
 
     it('should allow function calls with multiple arguments in values', () => {
       let content = `$funcs: (
-        max: max(1px, 4px), // 4px
-        min: min(1px, 4px), // 1px
         str-index: str-index("Helvetica Neue", "Neue"), // 11
         adjust-color: adjust-color(#d2e1dd, $red: -10, $blue: 10), // #c8e1e7
         rgba: rgba(255, 0, 0, .5), // rgba(255, 0, 0, 0.5)
@@ -271,23 +279,124 @@ describe('Parser class', () => {
       let structured = parser.parseStructured();
       let map = structured.variables[0].mapValue;
 
-      expect(map[0].name).be.equal('max');
-      expect(map[0].value).be.equal('max(1px, 4px)');
+      expect(map[0].name).be.equal('str-index');
+      expect(map[0].value).be.equal('str-index("Helvetica Neue", "Neue")');
 
-      expect(map[1].name).be.equal('min');
-      expect(map[1].value).be.equal('min(1px, 4px)');
+      expect(map[1].name).be.equal('adjust-color');
+      expect(map[1].value).be.equal('adjust-color(#d2e1dd, $red: -10, $blue: 10)');
 
-      expect(map[2].name).be.equal('str-index');
-      expect(map[2].value).be.equal('str-index("Helvetica Neue", "Neue")');
+      expect(map[2].name).be.equal('rgba');
+      expect(map[2].value).be.equal('rgba(255, 0, 0, .5)');
 
-      expect(map[3].name).be.equal('adjust-color');
-      expect(map[3].value).be.equal('adjust-color(#d2e1dd, $red: -10, $blue: 10)');
+      expect(map[3].name).be.equal('darken');
+      expect(map[3].value).be.equal('darken(#b37399, 20%)');
+    });
+  });
 
-      expect(map[4].name).be.equal('rgba');
-      expect(map[4].value).be.equal('rgba(255, 0, 0, .5)');
+  describe('nested maps support', () => {
+    it('should parse a map into an array', () => {
+      let content = `$breakpoints: (
+        small: 767px,
+        medium: 992px,
+        large: (
+          lg: 1200px,
+          xl: 1400px
+        )
+      );`;
 
-      expect(map[5].name).be.equal('darken');
-      expect(map[5].value).be.equal('darken(#b37399, 20%)');
+      let parser = new Parser(content);
+      let structured = parser.parseStructured();
+
+      expect(structured.variables[0].mapValue[2].mapValue).that.is.an('array');
+    });
+
+    it('should have a structured result', () => {
+      let content = `$breakpoints: (
+        small: 767px,
+        medium: $bp-medium,
+        large: (
+          lg: 1200px,
+          xl: $bp-xl
+        )
+      );`;
+
+      let parser = new Parser(content);
+      let structured = parser.parseStructured();
+      expect(structured.variables[0].mapValue[2].name).be.equal('large');
+
+      expect(structured.variables[0].mapValue[2].mapValue[0].name).be.equal(
+        'lg'
+      );
+      expect(structured.variables[0].mapValue[2].mapValue[0].value).be.equal(
+        '1200px'
+      );
+
+      expect(structured.variables[0].mapValue[2].mapValue[1].value).be.equal(
+        '$bp-xl'
+      );
+    });
+
+    it('should have a structured result for array type', () => {
+      let content = `$breakpoints: (
+        small: 767px,
+        medium: $bp-medium,
+        large: (
+          lg: 1200px,
+          xl: $bp-xl
+        )
+      );`;
+
+      let parser = new Parser(content);
+      let parsedArray = parser.parse();
+
+      expect(parsedArray[0].mapValue[2].name).be.equal('large');
+
+      expect(parsedArray[0].mapValue[2].mapValue[0].name).be.equal('lg');
+      expect(parsedArray[0].mapValue[2].mapValue[0].value).be.equal('1200px');
+
+      expect(parsedArray[0].mapValue[2].mapValue[1].value).be.equal('$bp-xl');
+    });
+
+    it('should parse map with single quote keys', () => {
+      let content = `$breakpoints: (
+        'small': 767px,
+        'medium': $bp-medium,
+        'large': (
+          'lg': 1200px,
+          'xl': $bp-xl
+        )
+      );`;
+
+      let parser = new Parser(content);
+      let parsedArray = parser.parse();
+
+      expect(parsedArray[0].mapValue[2].name).be.equal('large');
+
+      expect(parsedArray[0].mapValue[2].mapValue[0].name).be.equal('lg');
+      expect(parsedArray[0].mapValue[2].mapValue[0].value).be.equal('1200px');
+
+      expect(parsedArray[0].mapValue[2].mapValue[1].value).be.equal('$bp-xl');
+    });
+
+    it('should parse map with double quote keys', () => {
+      let content = `$breakpoints: (
+        "small": 767px,
+        "medium": $bp-medium,
+        "large": (
+          "lg": 1200px,
+          "xl": $bp-xl
+        )
+      );`;
+
+      let parser = new Parser(content);
+      let parsedArray = parser.parse();
+
+      expect(parsedArray[0].mapValue[2].name).be.equal('large');
+
+      expect(parsedArray[0].mapValue[2].mapValue[0].name).be.equal('lg');
+      expect(parsedArray[0].mapValue[2].mapValue[0].value).be.equal('1200px');
+
+      expect(parsedArray[0].mapValue[2].mapValue[1].value).be.equal('$bp-xl');
     });
   });
 });

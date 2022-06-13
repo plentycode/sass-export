@@ -4,7 +4,7 @@ exports.Parser = void 0;
 const VARIABLE_PATERN = '(?!\\d)[\\w_-][\\w\\d_-]*';
 const VALUE_PATERN = '[^;]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
 const DECLARATION_PATTERN = `\\$['"]?(${VARIABLE_PATERN})['"]?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
-const MAP_DECLARATIOM_REGEX = /['"]?((?!\d)[\w_-][\w\d_-]*)['"]?\s*:\s*([a-z\-]+\([^\)]+\)|[^\),\/]+)/gi;
+const MAP_DECLARATIOM_REGEX = /['"]?((?!\d)[\w_-][\w\d_-]*)['"]?\s*:\s*([a-z\-]+\([^\)]+\)|[^\)\(,\/]+|\([^\)]+\))/gi;
 const QUOTES_PATTERN = /^(['"]).*\1$/;
 const QUOTES_REPLACE = /^(['"])|(['"])$/g;
 const SECTION_TAG = 'sass-export-section';
@@ -22,10 +22,7 @@ class Parser {
             if (!this.checkIsSectionStart(match) && !this.checkIsSectionStart(match)) {
                 let parsed = this.parseSingleDeclaration(match);
                 if (parsed) {
-                    let map = this.extractMapDeclarations(parsed.value);
-                    if (map.length) {
-                        parsed.mapValue = map.map((declaration) => this.parseSingleDeclaration(`$${declaration};`));
-                    }
+                    this.parseMapDeclarations(parsed);
                     declarations.push(parsed);
                 }
             }
@@ -54,10 +51,7 @@ class Parser {
             else {
                 let parsed = this.parseSingleDeclaration(match);
                 if (parsed) {
-                    let map = this.extractMapDeclarations(parsed.value);
-                    if (map.length) {
-                        parsed.mapValue = map.map((declaration) => this.parseSingleDeclaration(`$${declaration};`));
-                    }
+                    this.parseMapDeclarations(parsed);
                     declarations[currentSection].push(parsed);
                 }
             }
@@ -92,12 +86,22 @@ class Parser {
         if (!matches) {
             return;
         }
-        let name = matches[1].trim().replace('_', '-');
+        let name = matches[1].trim();
         let value = matches[2].trim().replace(/\s*\n+\s*/g, ' ');
         if (value.match(QUOTES_PATTERN)) {
             value = value.replace(QUOTES_REPLACE, '');
         }
         return { name, value };
+    }
+    parseMapDeclarations(parsedDeclaration) {
+        let map = this.extractMapDeclarations(parsedDeclaration.value);
+        if (map.length) {
+            parsedDeclaration.mapValue = map.map((declaration) => {
+                const singleDeclaration = this.parseSingleDeclaration(`$${declaration};`);
+                this.parseMapDeclarations(singleDeclaration);
+                return singleDeclaration;
+            });
+        }
     }
     checkIsSectionStart(content) {
         return (new RegExp(SECTION_PATTERN, 'gi')).test(content);

@@ -34,7 +34,7 @@ describe('Utils class', () => {
   it('should wrap a variable', () => {
     let declaration = { name: 'var', value: '$the-value', compiledValue: '' };
     let expectedResult = '#sass-export-id.var{content:"#{$the-value}";}';
-    let wrapped = Utils.wrapCss(declaration);
+    let wrapped = Utils.wrapCss(declaration, false);
 
     expect(wrapped).to.be.equal(expectedResult);
   });

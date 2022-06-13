@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Converter = void 0;
 const fs = require("fs");
-const sass = require("node-sass");
+const sass = require("sass");
 const glob = require("glob");
 const parser_1 = require("../parser");
 const utils_1 = require("../utils");
@@ -16,11 +16,15 @@ class Converter {
         let content = this.getContent();
         let parsedDeclarations = new parser_1.Parser(content).parse();
         return parsedDeclarations.map((declaration) => {
-            declaration.compiledValue = this.renderPropertyValue(content, declaration);
+            let isMap = false;
+            if (declaration.mapValue) {
+                isMap = true;
+            }
+            declaration.compiledValue = this.renderPropertyValue(content, declaration, isMap);
             declaration.name = `$${declaration.name}`;
             if (declaration.mapValue) {
                 declaration.mapValue.map((mapDeclaration) => {
-                    mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration);
+                    mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration, true);
                     return mapDeclaration;
                 });
             }
@@ -37,12 +41,16 @@ class Converter {
         let groups = Object.keys(structuredDeclaration);
         groups.forEach((group) => {
             let content = this.getContent();
+            let isMap = false;
             let compiledGroup = structuredDeclaration[group].map((declaration) => {
-                declaration.compiledValue = this.renderPropertyValue(content, declaration);
+                if (declaration.mapValue) {
+                    isMap = true;
+                }
+                declaration.compiledValue = this.renderPropertyValue(content, declaration, isMap);
                 declaration.name = `$${declaration.name}`;
                 if (declaration.mapValue) {
                     declaration.mapValue.map((mapDeclaration) => {
-                        mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration);
+                        mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration, true);
                         return mapDeclaration;
                     });
                 }
@@ -78,14 +86,15 @@ class Converter {
         }
         return structuredDeclaration;
     }
-    renderPropertyValue(content, declaration) {
+    renderPropertyValue(content, declaration, isMap) {
         try {
             let rendered = sass.renderSync({
-                data: content + LINE_BREAK + utils_1.Utils.wrapCss(declaration),
+                data: content + LINE_BREAK + utils_1.Utils.wrapCss(declaration, isMap),
                 includePaths: this.options.includePaths,
-                outputStyle: 'compact'
+                outputStyle: 'compressed'
             });
             let wrappedRendered = String(rendered.css);
+            wrappedRendered = utils_1.Utils.removeDoubleQuotes(wrappedRendered);
             return utils_1.Utils.unWrapValue(wrappedRendered);
         }
         catch (err) {

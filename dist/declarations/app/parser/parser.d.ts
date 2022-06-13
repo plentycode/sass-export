@@ -7,6 +7,7 @@ export declare class Parser {
     private extractDeclarations;
     private extractMapDeclarations;
     private parseSingleDeclaration;
+    private parseMapDeclarations;
     private checkIsSectionStart;
     private checkIsSectionEnd;
 }

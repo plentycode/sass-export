@@ -1,5 +1,5 @@
 import * as fs from 'fs';
-import * as sass from 'node-sass';
+import * as sass from 'sass';
 import * as glob from 'glob';
 import { Parser, Mixins } from '../parser';
 import { Utils } from '../utils';
@@ -21,12 +21,19 @@ export class Converter {
     let parsedDeclarations = new Parser(content).parse();
 
     return parsedDeclarations.map((declaration) => {
-      declaration.compiledValue = this.renderPropertyValue(content, declaration);
+      let isMap = false;
+
+      if (declaration.mapValue) {
+        isMap = true;
+      }
+
+      declaration.compiledValue = this.renderPropertyValue(content, declaration, isMap);
       declaration.name = `$${declaration.name}`;
+
 
       if (declaration.mapValue) {
         declaration.mapValue.map((mapDeclaration) => {
-          mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration);
+          mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration, true);
           return mapDeclaration;
         });
       }
@@ -49,14 +56,19 @@ export class Converter {
 
     groups.forEach((group) => {
       let content = this.getContent();
-
+      let isMap = false;
       let compiledGroup = structuredDeclaration[group].map((declaration) => {
-        declaration.compiledValue = this.renderPropertyValue(content, declaration);
+
+        if (declaration.mapValue) {
+          isMap = true;
+        }
+
+        declaration.compiledValue = this.renderPropertyValue(content, declaration, isMap);
         declaration.name = `$${declaration.name}`;
 
         if (declaration.mapValue) {
           declaration.mapValue.map((mapDeclaration) => {
-            mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration);
+            mapDeclaration.compiledValue = this.renderPropertyValue(content, mapDeclaration, true);
             return mapDeclaration;
           });
         }
@@ -99,23 +111,23 @@ export class Converter {
     let parsedMixins = new Mixins(this.getContent()).parse();
 
     if (parsedMixins && parsedMixins.length) {
-      structuredDeclaration[mixinsGroup] =  parsedMixins;
+      structuredDeclaration[mixinsGroup] = parsedMixins;
     }
 
     return structuredDeclaration;
   }
 
 
-  private renderPropertyValue(content: string, declaration: IDeclaration): string {
+  private renderPropertyValue(content: string, declaration: IDeclaration, isMap: boolean): string {
     try {
       let rendered = sass.renderSync({
-        data: content + LINE_BREAK + Utils.wrapCss(declaration),
+        data: content + LINE_BREAK + Utils.wrapCss(declaration, isMap),
         includePaths: this.options.includePaths,
-        outputStyle: 'compact'
+        outputStyle: 'compressed'
       });
 
       let wrappedRendered = String(rendered.css);
-
+      wrappedRendered = Utils.removeDoubleQuotes(wrappedRendered);
       return Utils.unWrapValue(wrappedRendered);
 
     } catch (err) {

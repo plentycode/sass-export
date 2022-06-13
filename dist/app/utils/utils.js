@@ -8,8 +8,15 @@ class Utils {
         let filtered = declarations.filter((declaration) => declaration.name === name);
         return filtered[0];
     }
-    static wrapCss(cssDeclaration) {
+    static wrapCss(cssDeclaration, useInspect) {
+        if (useInspect) {
+            return `${WRAPPER_CSS_ID}.${cssDeclaration.name}{content:"#{inspect(${cssDeclaration.value})}";}`;
+        }
         return `${WRAPPER_CSS_ID}.${cssDeclaration.name}{content:"#{${cssDeclaration.value}}";}`;
+    }
+    static removeDoubleQuotes(wrappedContent) {
+        wrappedContent = wrappedContent.replace(/"([^'"]+(?="'))"/, '$1');
+        return wrappedContent;
     }
     static unWrapValue(wrappedContent) {
         wrappedContent = wrappedContent.replace(/\n/g, '');
