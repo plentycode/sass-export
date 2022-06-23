@@ -1,9 +1,8 @@
 const VARIABLE_PATERN = '(?!\\d)[\\w_-][\\w\\d_-]*';
+const MAP_KEY_PATTERN = '[\\w-]+';
 const VALUE_PATERN = '[^;]+|"(?:[^"]+|(?:\\\\"|[^"])*)"';
-const DECLARATION_PATTERN =
-  `\\$['"]?(${VARIABLE_PATERN})['"]?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
 
-const MAP_DECLARATIOM_REGEX = /['"]?((?!\d)[\w_-][\w\d_-]*)['"]?\s*:\s*([a-z\-]+\([^\)]+\)|[^\)\(,\/]+|\([^\)]+\))/gi;
+const MAP_DECLARATIOM_REGEX = /['"]?([\w_-][\w\d_-]*)['"]?\s*:\s*([a-z\-]+\([^\)]+\)|[^\)\(,\/]+|\([^\)]+\))/gi;
 
 const QUOTES_PATTERN = /^(['"]).*\1$/;
 const QUOTES_REPLACE = /^(['"])|(['"])$/g;
@@ -77,7 +76,7 @@ export class Parser {
 
 
   private extractDeclarationsStructured(content: string): [any] {
-    const matches = content.match(new RegExp(`${DECLARATION_PATTERN}|${SECTION_PATTERN}|${END_SECTION_PATTERN}`, 'g'));
+    const matches = content.match(new RegExp(`${this.getDeclarationPattern()}|${SECTION_PATTERN}|${END_SECTION_PATTERN}`, 'g'));
 
     if (!matches) {
       return [] as any;
@@ -88,7 +87,7 @@ export class Parser {
 
 
   private extractDeclarations(content: string): [any] {
-    const matches = content.match(new RegExp(DECLARATION_PATTERN, 'g'));
+    const matches = content.match(new RegExp(this.getDeclarationPattern(), 'g'));
 
     if (!matches) {
       return [] as any;
@@ -108,10 +107,10 @@ export class Parser {
   }
 
 
-  private parseSingleDeclaration(matchDeclaration: string): IDeclaration {
+  private parseSingleDeclaration(matchDeclaration: string, isMap: boolean = false): IDeclaration {
     let matches = matchDeclaration
       .replace(/\s*!(default|global)\s*;/, ';')
-      .match(new RegExp(DECLARATION_PATTERN));
+      .match(new RegExp(this.getDeclarationPattern(isMap)));
 
     if (!matches) {
       return;
@@ -132,7 +131,8 @@ export class Parser {
     if (map.length) {
       parsedDeclaration.mapValue = map.map((declaration) => {
         const singleDeclaration = this.parseSingleDeclaration(
-          `$${declaration};`
+          `$${declaration};`,
+          true
         );
         this.parseMapDeclarations(singleDeclaration);
 
@@ -147,5 +147,9 @@ export class Parser {
 
   private checkIsSectionEnd(content: string): boolean {
     return (new RegExp(END_SECTION_PATTERN, 'gi')).test(content);
+  }
+
+  private getDeclarationPattern(isMap: boolean = false): string {
+    return `\\$['"]?(${isMap ? MAP_KEY_PATTERN : VARIABLE_PATERN})['"]?\\s*:\\s*(${VALUE_PATERN})(?:\\s*!(global|default)\\s*;|\\s*;(?![^\\{]*\\}))`;
   }
 }
